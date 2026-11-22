@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jogo da Forca</title>
+<style>
+  :root {
+    --bg1: #0b1120; --bg2: #1e1b4b;
+    --card: #172033; --card-hi: #1f2b45; --border: #2e3b55;
+    --text: #f1f5f9; --muted: #94a3b8; --dim: #55627a;
+    --accent: #f59e0b; --accent2: #38bdf8;
+    --ok: #22c55e; --err: #ef4444; --ok-dark: #14532d; --err-dark: #5b1a1f;
+    --key: #2b3a55; --key-hi: #3a4b6b; --wood: #b7791f; --wood-dark: #7c4a12;
+    --rope: #d6d3d1; --body: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    font-family: "Ubuntu", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    color: var(--text);
+    background: radial-gradient(circle at 88% 10%, #12304a 0 160px, transparent 161px),
+                radial-gradient(circle at 6% 92%, #232a5c 0 200px, transparent 201px),
+                linear-gradient(180deg, var(--bg1), var(--bg2)) fixed;
+    background-color: var(--bg1);
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; color: inherit; border: 0; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 28px; }
+
+  /* ---------- Menu ---------- */
+  #menu { text-align: center; padding-top: 24px; }
+  .logo { display: flex; align-items: center; justify-content: center; gap: 22px; }
+  .logo svg { width: 70px; height: 92px; }
+  .logo h1 {
+    margin: 0; font-size: clamp(48px, 11vw, 78px); letter-spacing: 4px; color: var(--accent);
+    text-shadow: 3px 4px 0 #000;
+  }
+  .sub { color: var(--muted); margin: 8px 0 30px; }
+  .label { font-weight: 700; letter-spacing: 2px; font-size: 14px; margin: 26px 0 14px; }
+  .levels { display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: 20px; justify-content: center; }
+  .level {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 20px;
+    padding: 18px 10px; transition: transform .12s, border-color .12s, background .12s;
+  }
+  .level:hover { transform: translateY(-2px); border-color: var(--muted); }
+  .level.sel { background: var(--card-hi); border: 3px solid var(--accent); padding: 16.5px 8.5px; }
+  .level b { display: block; font-size: 22px; }
+  .level.sel b { color: var(--accent); }
+  .level span { display: block; color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .level small { display: block; color: var(--dim); font-size: 12px; margin-top: 4px; }
+  .themes { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .theme {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 999px;
+    padding: 11px 20px; font-weight: 700; font-size: 15px; transition: background .12s;
+  }
+  .theme:hover { background: var(--card-hi); }
+  .theme.sel { background: var(--accent2); border-color: var(--accent2); color: #0b1120; }
+  .theme em { font-style: normal; opacity: .7; font-weight: 500; margin-left: 4px; }
+  .btn {
+    background: var(--accent); color: #0b1120; font-weight: 800; border-radius: 16px;
+    padding: 14px 28px; font-size: 17px; transition: filter .12s, transform .12s;
+  }
+  .btn:hover { filter: brightness(1.12); }
+  .btn:active { transform: scale(.98); }
+  .btn.dark { background: var(--key); color: var(--text); }
+  .btn.play { margin-top: 36px; width: 280px; max-width: 100%; font-size: 22px; padding: 18px; letter-spacing: 2px; }
+  .stats-line { color: var(--muted); margin-top: 26px; min-height: 1.2em; }
+  .foot { color: var(--dim); font-size: 13px; margin-top: 22px; }
+
+  /* ---------- Jogo ---------- */
+  header.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  header.bar .brand { font-size: 28px; font-weight: 800; color: var(--accent); letter-spacing: 1px; }
+  .stats { display: flex; gap: 26px; }
+  .stat { text-align: center; }
+  .stat small { display: block; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+  .stat b { font-size: 17px; }
+  .grid { display: grid; grid-template-columns: 440px minmax(0, 1fr); gap: 28px; }
+  .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 24px; }
+  .gallows { padding: 20px 20px 16px; display: flex; flex-direction: column; align-items: center; }
+  .gallows > svg { width: 100%; max-width: 380px; height: auto; }
+  .part { opacity: 0; transition: opacity .2s; }
+  .part.on { opacity: 1; }
+  .part.flash { stroke: var(--err) !important; }
+  .lost .part, .lost .face * { stroke: var(--err); }
+  .lost .face .eye-dot { fill: var(--err); }
+  .lives-txt { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .hearts { display: flex; gap: 8px; margin-top: 6px; }
+  .hearts svg { width: 24px; height: 22px; display: block; }
+  .hearts path { fill: var(--err); transition: fill .25s; }
+  .hearts .lost path { fill: var(--dim); }
+
+  .right { display: flex; flex-direction: column; min-width: 0; }
+  .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .chip { border-radius: 999px; padding: 6px 16px; font-weight: 700; font-size: 15px; border: 1.5px solid; }
+  .chip.lvl { color: var(--accent2); border-color: var(--accent2); background: #1b3550; }
+  .chip.tema { color: var(--accent); border-color: var(--accent); background: #3a2f22; }
+  .chips .note { color: var(--dim); font-size: 12px; margin-left: auto; }
+
+  .word { min-width: 0; overflow: hidden; min-height: 190px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 18px 0; }
+  .line { display: flex; justify-content: center; }
+  .slot {
+    width: var(--s); height: calc(var(--s) * 1.2); display: flex; align-items: center; justify-content: center;
+    font-size: calc(var(--s) * .58); font-weight: 800; position: relative;
+  }
+  .slot.letter::after {
+    content: ""; position: absolute; left: 14%; right: 14%; bottom: 2px; height: 4px; border-radius: 2px;
+    background: var(--dim);
+  }
+  .slot.rev::after { background: var(--accent); }
+  .win .slot.rev::after { background: var(--ok); }
+  .slot.rev span { animation: pop .28s ease-out; }
+  .slot.miss { color: var(--err); }
+  .slot.sep { color: var(--muted); }
+  @keyframes pop { from { transform: scale(.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .shake { animation: shake .3s; }
+  @keyframes shake { 20% { transform: translateX(10px); } 40% { transform: translateX(-10px); } 60% { transform: translateX(7px); } 80% { transform: translateX(-4px); } }
+
+  .hint { padding: 16px 22px; min-height: 112px; }
+  .hint h3 { margin: 0 0 8px; color: var(--accent); font-size: 15px; letter-spacing: 1px; }
+  .hint p { margin: 0; line-height: 1.45; }
+  .hint .wait { color: var(--muted); }
+  .hint .buy { margin-top: 10px; background: var(--key); color: var(--accent); border-radius: 10px; padding: 7px 14px; font-size: 13px; font-weight: 700; }
+  .hint .buy:hover { background: var(--key-hi); }
+
+  .kbd { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .krow { display: flex; gap: 8px; justify-content: center; width: 100%; }
+  .key {
+    width: 50px; height: 54px; flex: 0 1 50px; border-radius: 12px; background: var(--key);
+    font-size: 18px; font-weight: 800; transition: background .12s, transform .08s;
+  }
+  .key:hover:not(:disabled) { background: var(--key-hi); }
+  .key:active:not(:disabled) { transform: scale(.94); }
+  .key:disabled { cursor: default; color: var(--dim); }
+  .key.ok { background: var(--ok-dark); color: var(--ok); box-shadow: inset 0 0 0 1.5px var(--ok); }
+  .key.bad { background: var(--err-dark); color: #a8a29e; box-shadow: inset 0 0 0 1.5px var(--err); }
+  .help { text-align: center; color: var(--dim); font-size: 12px; margin-top: 14px; }
+
+  /* ---------- Resultado ---------- */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(2, 6, 18, .72); backdrop-filter: blur(3px);
+    display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10;
+    animation: fade .25s;
+  }
+  @keyframes fade { from { opacity: 0; } }
+  .modal {
+    background: var(--card); border: 3px solid var(--ok); border-radius: 28px; padding: 28px 30px 20px;
+    width: 520px; max-width: 100%; text-align: center; animation: rise .3s ease-out;
+  }
+  @keyframes rise { from { transform: translateY(24px) scale(.96); opacity: 0; } }
+  .modal.lose { border-color: var(--err); }
+  .modal h2 { margin: 0 0 10px; font-size: 32px; color: var(--ok); }
+  .modal.lose h2 { color: var(--err); }
+  .modal .was { color: var(--muted); margin: 0; }
+  .modal .w { font-size: 26px; font-weight: 800; margin: 4px 0 12px; word-break: break-word; }
+  .modal .gain { color: var(--accent); font-weight: 700; margin: 0 0 14px; }
+  .modal .det { color: var(--muted); margin: 0 0 22px; line-height: 1.45; }
+  .modal .acts { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .modal .acts .btn { flex: 1 1 160px; }
+  .modal .foot { margin-top: 14px; }
+  .sound { padding: 10px 14px; font-size: 15px; min-width: 48px; }
+  .sound-menu { margin-top: 14px; background: transparent; color: var(--muted); font-size: 14px; padding: 6px 12px; border-radius: 10px; }
+  .sound-menu:hover { background: var(--card); color: var(--text); }
+  #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .gallows { flex-direction: row; justify-content: center; gap: 18px; padding: 12px; }
+    .gallows > svg { width: 150px; }
+    .gallows .lives { display: flex; flex-direction: column; align-items: center; }
+    .stats { gap: 14px; }
+  }
+  @media (max-width: 640px) {
+    .levels { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; gap: 12px; }
+    .level { padding: 12px; } .level.sel { padding: 10.5px; }
+    .logo svg { width: 50px; height: 66px; }
+    header.bar { flex-wrap: wrap; }
+    header.bar .brand { font-size: 22px; }
+    .stats { order: 3; width: 100%; justify-content: space-between; }
+    .word { min-height: 130px; }
+    .krow { gap: 5px; } .kbd { gap: 6px; }
+    .key { height: 48px; font-size: 16px; border-radius: 9px; min-width: 0; }
+    .chips .note { display: none; }
+    .modal { padding: 22px 18px 16px; }
+    .modal h2 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<!-- ================= MENU ================= -->
+<section id="menu" class="wrap">
+  <div class="logo">
+    <svg viewBox="0 0 70 92" aria-hidden="true">
+      <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M4 88 H56 M14 88 V4 H54" stroke="#b7791f" stroke-width="6"/>
+        <path d="M54 4 V18" stroke="#d6d3d1" stroke-width="2"/>
+        <g stroke="#f8fafc" stroke-width="3">
+          <circle cx="54" cy="27" r="9"/><path d="M54 36 V64 M42 48 L54 42 L66 48 M44 80 L54 64 L64 80"/>
+        </g>
+      </g>
+    </svg>
+    <h1>FORCA</h1>
+  </div>
+  <p class="sub">Adivinhe a palavra antes que o boneco seja enforcado</p>
+
+  <div class="label">DIFICULDADE</div>
+  <div class="levels" id="levels"></div>
+
+  <div class="label">TEMA</div>
+  <div class="themes" id="themes"></div>
+
+  <button class="btn play" id="btnPlay">JOGAR</button>
+  <div class="stats-line" id="statsLine"></div>
+  <button class="sound-menu" id="btnSomMenu"></button>
+  <div class="foot">Enter para jogar · Use o teclado ou o mouse/toque</div>
+</section>
+
+<!-- ================= JOGO ================= -->
+<section id="game" class="wrap hidden">
+  <header class="bar">
+    <div class="brand">FORCA</div>
+    <div class="stats">
+      <div class="stat"><small>PONTOS</small><b id="sPts">0</b></div>
+      <div class="stat"><small>SEQUÊNCIA</small><b id="sSeq">0</b></div>
+      <div class="stat"><small>VITÓRIAS</small><b id="sWin">0</b></div>
+      <div class="stat"><small>DERROTAS</small><b id="sLose">0</b></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn dark sound" id="btnSom" title="Ligar/desligar som"></button><button class="btn dark" id="btnMenu" style="padding:10px 22px;font-size:15px">Menu</button></div>
+  </header>
+
+  <div class="grid">
+    <div class="card gallows" id="gallows">
+      <svg viewBox="0 0 400 520" aria-label="Forca">
+        <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <g transform="translate(4 4)" stroke="var(--wood-dark)">
+            <path d="M40 490 H300" stroke-width="14"/>
+            <path d="M90 490 V30 H310" stroke-width="12"/>
+            <path d="M90 95 L155 30" stroke-width="8"/>
+          </g>
+          <g stroke="var(--wood)">
+            <path d="M40 490 H300" stroke-width="14"/>
+            <path d="M90 490 V30 H310" stroke-width="12"/>
+            <path d="M90 95 L155 30" stroke-width="8"/>
+          </g>
+          <path d="M300 34 V80" stroke="var(--rope)" stroke-width="4"/>
+          <g stroke="var(--body)" stroke-width="7">
+            <circle class="part" id="p0" cx="300" cy="115" r="35" fill="var(--card)" stroke-width="6"/>
+            <path class="part" id="p1" d="M300 150 V270"/>
+            <path class="part" id="p2" d="M300 175 L250 235"/>
+            <path class="part" id="p3" d="M300 175 L350 235"/>
+            <path class="part" id="p4" d="M300 270 L258 355"/>
+            <path class="part" id="p5" d="M300 270 L342 355"/>
+          </g>
+          <g class="face hidden" id="face" stroke="var(--body)" stroke-width="3"></g>
+        </g>
+      </svg>
+      <div class="lives">
+        <div class="lives-txt" id="livesTxt"></div>
+        <div class="hearts" id="hearts"></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="chips">
+        <span class="chip lvl" id="chipLvl"></span>
+        <span class="chip tema" id="chipTema"></span>
+        <span class="note" id="temaNote">tema revelado no 1º erro</span>
+      </div>
+      <div class="word" id="word"></div>
+      <div class="card hint" id="hint"></div>
+      <div class="kbd" id="kbd"></div>
+      <div class="help">Digite ou clique nas letras · Esc: menu</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESULTADO ================= -->
+<div class="overlay hidden" id="overlay">
+  <div class="modal" id="modal">
+    <h2 id="rTitle"></h2>
+    <p class="was">A palavra era</p>
+    <div class="w" id="rWord"></div>
+    <p class="gain" id="rGain"></p>
+    <p class="det" id="rDet"></p>
+    <div class="acts">
+      <button class="btn" id="btnAgain">Jogar novamente</button>
+      <button class="btn dark" id="btnMenu2">Menu</button>
+    </div>
+    <div class="foot">Enter: jogar novamente · Esc: menu</div>
+  </div>
+</div>
+
+<script>
+/* Base gerada a partir de Base_Palavras.csv (duplicatas agrupadas por tema + palavra). */
+const PALAVRAS = [{"tema":"frutas","palavra":"MELANCIA","dicas":{"Difícil":"Verde por fora, doce dentro.","Médio":"Verde por fora, doce e suculenta por dentro, refresca no verão.","Fácil":"Verde por fora, vermelha por dentro, refrescante e doce, perfeita para dias quentes de verão."}},{"tema":"frutas","palavra":"ABACAXI","dicas":{"Difícil":"Coroa espinhosa, sabor tropical doce.","Médio":"Tropical, doce e espinhosa, sua coroa é sua marca registrada.","Fácil":"Essa fruta tropical tem uma coroa espinhosa e é conhecida por seu sabor doce e ácido."}},{"tema":"frutas","palavra":"KIWI","dicas":{"Difícil":"Verde por fora, doce dentro.","Médio":"Verde por fora, doce por dentro, sementes pretas em contraste.","Fácil":"Verde por fora, com sementes pretas e polpa suculenta, é uma explosão de sabor tropical."}},{"tema":"frutas","palavra":"BANANA","dicas":{"Difícil":"Amarela, doce, rica em potássio.","Médio":"Amarela por fora, doce por dentro, perfeita para um lanche.","Fácil":"Amarela por fora, doce por dentro, frequentemente curvada, é perfeita para um lanche rápido."}},{"tema":"frutas","palavra":"MANGA","dicas":{"Difícil":"Tropical, suculenta, doce e amarela.","Médio":"É tropical, suculenta e sua cor lembra o pôr do sol.","Fácil":"É uma fruta tropical, suculenta e doce, com casca colorida e polpa amarela vibrante."}},{"tema":"frutas","palavra":"LARANJA","dicas":{"Difícil":"Cor vibrante, suco cítrico refrescante.","Médio":"Ela é cítrica, redonda, vibrante e rica em vitamina C.","Fácil":"É uma esfera vibrante, cheia de suco, que traz o sol em sua cor e sabor."}},{"tema":"frutas","palavra":"CAJU","dicas":{"Difícil":"Nordeste brasileiro, sabor único, castanha.","Médio":"Possui uma castanha famosa e é símbolo do Nordeste brasileiro.","Fácil":"Originária do Brasil, essa fruta tem uma castanha famosa e é usada em sucos e doces."}},{"tema":"frutas","palavra":"MORANGO","dicas":{"Difícil":"Vermelha, doce, pequena e suculenta.","Médio":"Vermelha, doce e pequena, combina bem com chantilly e sobremesas.","Fácil":"É uma fruta vermelha, doce e suculenta, frequentemente usada em sobremesas e bebidas refrescantes."}},{"tema":"frutas","palavra":"PÊSSEGO","dicas":{"Difícil":"Doce e suculenta, cor rosada.","Médio":"Doce e suculenta, sua cor lembra o pôr do sol.","Fácil":"Doce e suculenta, sua cor lembra o pôr do sol e é coberta por uma pele aveludada."}},{"tema":"frutas","palavra":"UVA","dicas":{"Difícil":"Pequena, doce, cresce em cachos.","Médio":"Pequena, suculenta, cresce em cachos e é usada para vinho.","Fácil":"Pequena e suculenta, sua cor varia do verde ao roxo, perfeita para vinhos e sobremesas deliciosas."}},{"tema":"frutas","palavra":"PITANGA","dicas":{"Difícil":"Pequena, vermelha, sabor tropical vibrante.","Médio":"Pequena, vermelha e suculenta, lembra o sabor tropical do Brasil.","Fácil":"Pequena e vibrante, essa fruta tropical encanta com seu sabor doce-azedo e cor vermelho-alaranjada."}},{"tema":"frutas","palavra":"JABUTICABA","dicas":{"Difícil":"Pequena, escura, cresce no tronco.","Médio":"Pequena, escura, cresce no tronco e é doce brasileira.","Fácil":"Pequena e escura, cresce diretamente no tronco, oferecendo um sabor doce e suculento ao paladar."}},{"tema":"frutas","palavra":"ACEROLA","dicas":{"Difícil":"Pequena, vermelha, rica em vitamina.","Médio":"Pequena, vermelha e rica em vitamina C, cresce em arbustos.","Fácil":"Pequena e vermelha, esta fruta tropical é rica em vitamina C e cresce em climas quentes."}},{"tema":"frutas","palavra":"MAMÃO","dicas":{"Difícil":"Doce laranja tropical, sementes pretas.","Médio":"Doce e tropical, sua polpa laranja é cheia de sementes.","Fácil":"É uma fruta tropical, de casca amarela ou verde, polpa laranja e sabor doce e suave."}},{"tema":"frutas","palavra":"COCO","dicas":{"Difícil":"Água doce dentro da casca.","Médio":"Casca dura, interior branco e líquido refrescante para dias quentes.","Fácil":"É uma fruta tropical, marrom por fora e branca por dentro, famosa por sua água refrescante."}},{"tema":"frutas","palavra":"AMORA","dicas":{"Difícil":"Pequena, escura, doce e suculenta.","Médio":"Pequena e escura, cresce em arbustos e é suculenta.","Fácil":"Pequena e escura, esta fruta cresce em arbustos e é usada em geleias e sobremesas deliciosas."}},{"tema":"frutas","palavra":"GRAVIOLA","dicas":{"Difícil":"Verde, espinhosa, doce e tropical.","Médio":"Verde por fora, polpa branca e sabor exótico que surpreende paladares.","Fácil":"Essa fruta tropical tem casca verde espinhosa e é conhecida por seu sabor doce e ácido."}},{"tema":"frutas","palavra":"CEREJA","dicas":{"Difícil":"Pequena, vermelha e saborosamente doce.","Médio":"Pequena, vermelha e doce, frequentemente usada para decorar sobremesas.","Fácil":"Pequena e vermelha, esta fruta é frequentemente usada para decorar sobremesas e tem um sabor doce."}},{"tema":"frutas","palavra":"MARACUJÁ","dicas":{"Difícil":"Sabor tropical com toque azedo.","Médio":"Amarela por fora, azeda por dentro, acalma com seu aroma exótico.","Fácil":"Essa fruta tropical é conhecida por seu sabor azedo e aroma intenso que acalma os sentidos."}},{"tema":"frutas","palavra":"GOIABA","dicas":{"Difícil":"Doce, tropical, casca verde, polpa.","Médio":"Doce e tropical, sua polpa rosa encanta em sobremesas deliciosas.","Fácil":"É uma fruta tropical, doce e suculenta, com casca verde e polpa rosada ou branca."}},{"tema":"frutas","palavra":"CARAMBOLA","dicas":{"Difícil":"Cinco pontas formam sua estrela.","Médio":"Cinco pontas douradas, sabor agridoce, estrela tropical no céu.","Fácil":"Possui formato de estrela quando cortada, sabor agridoce e é rica em vitamina C e antioxidantes."}},{"tema":"frutas","palavra":"ABACATE","dicas":{"Difícil":"Verde por fora, cremosa por dentro.","Médio":"Verde por fora, cremoso por dentro, perfeito para guacamole e vitaminas.","Fácil":"É uma fruta cremosa e verde, frequentemente usada em saladas e guacamole, rica em nutrientes."}},{"tema":"frutas","palavra":"TANGERINA","dicas":{"Difícil":"Cor laranja, sabor cítrico refrescante.","Médio":"Pequena, cítrica e doce, sua casca é fácil de remover.","Fácil":"Pequena, cítrica e doce, sua casca é fácil de remover e seu aroma é refrescante."}},{"tema":"frutas","palavra":"LIMÃO","dicas":{"Difícil":"Amarela, azeda, refrescante e cítrica.","Médio":"Amarela por fora, azeda por dentro, perfeita para uma limonada refrescante.","Fácil":"É uma fruta cítrica, verde por fora, amarela por dentro, e seu suco é bem azedo."}},{"tema":"frutas","palavra":"MAÇÃ","dicas":{"Difícil":"Doce tentação em cores vibrantes.","Médio":"É vermelha, doce, crocante e famosa por manter médicos longe.","Fácil":"É uma fruta popular, frequentemente associada à saúde, e pode ser vermelha, verde ou amarela."}},{"tema":"frutas","palavra":"FRAMBOESA","dicas":{"Difícil":"Pequena, vermelha, doce e suculenta.","Médio":"Pequena e vermelha, é doce e cresce em arbustos silvestres.","Fácil":"Pequena e vermelha, esta fruta é doce e azeda, perfeita para sobremesas e geleias deliciosas."}},{"tema":"frutas","palavra":"PERA","dicas":{"Difícil":"Doce e suculenta, verde amarela.","Médio":"Doce e suculenta, sua casca esconde um interior macio.","Fácil":"É uma fruta suculenta, de casca fina e sabor doce, frequentemente associada a formas elegantes."}},{"tema":"frutas","palavra":"JACA","dicas":{"Difícil":"Grande, espinhosa, doce e tropical.","Médio":"É grande, espinhosa por fora e doce com gomos suculentos dentro.","Fácil":"É uma fruta tropical grande, com casca espinhosa e polpa doce, popular em várias culinárias asiáticas."}},{"tema":"frutas","palavra":"CACAU","dicas":{"Difícil":"Doce origem de sabor intenso.","Médio":"Doce tentação que vem de sementes, transforma-se em delícia cremosa.","Fácil":"Em uma jornada tropical, um sabor amargo se transforma em doce prazer para muitos paladares."}},{"tema":"frutas","palavra":"CABELUDINHA","dicas":{"Difícil":"Pequena, amarela, doce e tropical.","Médio":"Pequena, amarela e doce, cresce em arbustos no Brasil.","Fácil":"Pequena e amarela, essa fruta brasileira tem sabor doce e cresce em arbustos tropicais exuberantes."}},{"tema":"plantas","palavra":"CAJUÍNA","dicas":{"Difícil":"Doce bebida dourada do Nordeste.","Médio":"Fruto tropical dourado, bebida doce, tradição nordestina, celebração cultural única.","Fácil":"Fruto tropical dourado, transformado em bebida doce e clara, celebrada na cultura nordestina brasileira."}},{"tema":"plantas","palavra":"CANA-DE-AÇÚCAR","dicas":{"Difícil":"Doce seiva cresce em colmos.","Médio":"Doce se torna quando processada, movendo economias e adoçando vidas.","Fácil":"Ela cresce alta nos campos, transformando luz solar em doçura líquida que adoça nossas vidas."}},{"tema":"plantas","palavra":"CAFÉ","dicas":{"Difícil":"Aroma quente, folhas verdes vibrantes.","Médio":"Folhas verdes crescem, enquanto grãos torrados despertam aromas pela manhã.","Fácil":"A bebida escura e aromática que desperta, muitas vezes cultivada em regiões tropicais e montanhosas."}},{"tema":"plantas","palavra":"MANGOSTÃO","dicas":{"Difícil":"Fruta exótica com casca roxa.","Médio":"Fruta exótica, casca roxa, polpa branca, sabor doce e cítrico.","Fácil":"Esta fruta exótica é conhecida como a \"rainha das frutas\" e tem casca roxa espessa."}},{"tema":"plantas","palavra":"COUVE","dicas":{"Difícil":"Folhas verdes ricas em nutrientes.","Médio":"Verde e folhosa, rica em nutrientes, usada em pratos tradicionais.","Fácil":"Verde e folhosa, é rica em nutrientes e frequentemente usada em sopas e saladas saudáveis."}},{"tema":"plantas","palavra":"ORQUÍDEA","dicas":{"Difícil":"Beleza exótica em ambientes tropicais.","Médio":"Elegante e exótica, floresce em ambientes tropicais com cuidado especial.","Fácil":"Delicada e exótica, esta flor encanta com suas pétalas simétricas e cores vibrantes na natureza."}},{"tema":"plantas","palavra":"IPÊ","dicas":{"Difícil":"Flores amarelas embelezam nossas ruas.","Médio":"Flores amarelas, rosas ou brancas embelezam ruas durante o inverno.","Fácil":"Suas flores vibrantes colorem a paisagem brasileira, anunciando a chegada de uma nova estação."}},{"tema":"plantas","palavra":"JASMIM","dicas":{"Difícil":"Perfume doce em noites quentes.","Médio":"Perfume doce e delicado, flores brancas que encantam ao entardecer.","Fácil":"Delicada fragrância noturna, suas flores brancas encantam jardins e inspiram poetas com sua beleza sutil."}},{"tema":"plantas","palavra":"SAMAMBAIA","dicas":{"Difícil":"Folhas verdes em cascata elegante.","Médio":"Folhas verdes e delicadas, adoram sombra e umidade para prosperar.","Fácil":"Folhas verdes e delicadas, adoram sombra e umidade, trazendo frescor e beleza para qualquer ambiente."}},{"tema":"plantas","palavra":"ALOE","dicas":{"Difícil":"Suavidade em folhas suculentas verdes.","Médio":"Suas folhas suculentas guardam segredos de cura e hidratação.","Fácil":"Suas folhas suculentas guardam um gel calmante, frequentemente usado para aliviar queimaduras e hidratar pele."}},{"tema":"plantas","palavra":"PITANGA","dicas":{"Difícil":"Fruta vermelha com sabor tropical.","Médio":"Fruto pequeno, vermelho e azedo, comum em quintais tropicais brasileiros.","Fácil":"Fruto pequeno e vermelho, muito apreciado em sucos e sobremesas, típico de regiões tropicais e subtropicais."}},{"tema":"plantas","palavra":"GIRASSOL","dicas":{"Difícil":"Segue o sol com alegria.","Médio":"Segue o sol com graça, sempre buscando a luz dourada.","Fácil":"Ela segue o sol durante o dia, exibindo pétalas amarelas que lembram um sorriso radiante."}},{"tema":"plantas","palavra":"GUARANÁ","dicas":{"Difícil":"Energia amazônica em sementes vibrantes.","Médio":"Energia amazônica em forma de fruto, refrescante e borbulhante bebida.","Fácil":"Uma fruta amazônica, energética e vermelha, com sementes que lembram olhos, usada em bebidas refrescantes."}},{"tema":"plantas","palavra":"AÇAÍ","dicas":{"Difícil":"Energia roxa da floresta amazônica.","Médio":"Fruto roxo amazônico, energético, popular em tigelas e bebidas refrescantes.","Fácil":"Fruto roxo da Amazônia, muito energético, consumido em tigelas e sucos, popular entre atletas e turistas."}},{"tema":"plantas","palavra":"MANJERICÃO","dicas":{"Difícil":"Folhas verdes com aroma intenso.","Médio":"Folhas verdes aromáticas, perfeitas para pizzas e pratos italianos frescos.","Fácil":"É uma erva aromática popular na culinária italiana, frequentemente usada para fazer molho pesto fresco."}},{"tema":"plantas","palavra":"HORTELÃ","dicas":{"Difícil":"Folhas verdes com aroma refrescante.","Médio":"Folhas verdes aromáticas, usadas em chás e sobremesas refrescantes deliciosas.","Fácil":"Folhas verdes aromáticas, frequentemente usadas em chás e sobremesas, refrescam o paladar com seu toque único."}},{"tema":"plantas","palavra":"ORÉGANO","dicas":{"Difícil":"Erva aromática usada em pizzas.","Médio":"Usada na culinária italiana, esta erva aromática é indispensável em pizzas.","Fácil":"Usada em pizzas, essa erva aromática é essencial na culinária italiana e tem folhas pequenas."}},{"tema":"plantas","palavra":"ROSA","dicas":{"Difícil":"Perfume suave e pétalas vermelhas.","Médio":"Delicada e perfumada, simboliza amor e beleza em jardins floridos.","Fácil":"Delicada e perfumada, sua beleza é celebrada em jardins e simboliza amor e paixão eternos."}},{"tema":"plantas","palavra":"AZALEIA","dicas":{"Difícil":"Florescem em arbustos vibrantes, coloridos.","Médio":"Florescem em arbustos, cores vibrantes, símbolo de amor e paciência.","Fácil":"Florescendo em arbustos, suas pétalas vibrantes trazem alegria ao inverno, simbolizando amor e paixão delicada."}},{"tema":"plantas","palavra":"BROMÉLIA","dicas":{"Difícil":"Folhas em roseta, flores exóticas.","Médio":"Adapta-se bem em ambientes tropicais, com folhas em roseta espinhosa.","Fácil":"Ela adora se agarrar em árvores, exibindo suas folhas em roseta e flores exóticas vibrantes."}},{"tema":"plantas","palavra":"JACARANDÁ","dicas":{"Difícil":"Madeira nobre de flores roxas.","Médio":"Madeira nobre, flores roxas, símbolo de beleza em paisagens urbanas.","Fácil":"Suas flores roxas colorem as ruas, enquanto sua madeira é valorizada por sua beleza e resistência."}},{"tema":"plantas","palavra":"CAMÉLIA","dicas":{"Difícil":"Flor asiática, símbolo de elegância.","Médio":"Florescem no inverno, simbolizando beleza e perfeição em jardins orientais.","Fácil":"Suas flores elegantes desabrocham no inverno, trazendo beleza e cor aos jardins frios e sombrios."}},{"tema":"plantas","palavra":"EUCALIPTO","dicas":{"Difícil":"Folhas aromáticas e crescimento rápido.","Médio":"Folhas aromáticas, tronco alto, origem australiana, madeira resistente, crescimento rápido.","Fácil":"Esta árvore alta e aromática é conhecida por suas folhas que alimentam coalas na Austrália."}},{"tema":"plantas","palavra":"ARAUCÁRIA","dicas":{"Difícil":"Folhas em espiral, pinhas imponentes.","Médio":"Folhas em espiral, símbolo do sul, pinhões caem no inverno.","Fácil":"Majestosa e resistente, esta árvore é símbolo de uma região fria e produz saborosos pinhões."}},{"tema":"plantas","palavra":"SUCULENTAS","dicas":{"Difícil":"Água pouca, folhas grossas, resistência.","Médio":"Resistem bem à seca, armazenando água em suas folhas carnudas.","Fácil":"Elas armazenam água em suas folhas carnudas, prosperando em ambientes áridos com pouca manutenção necessária."}},{"tema":"plantas","palavra":"BOLDO","dicas":{"Difícil":"Folhas amargas usadas para chá.","Médio":"Folhas verdes, infusão popular, alívio digestivo, sabor amargo característico.","Fácil":"É uma planta conhecida por suas folhas aromáticas, frequentemente usada para chás e digestão."}},{"tema":"plantas","palavra":"MANACÁ","dicas":{"Difícil":"Floresce em cores vibrantes alternadas.","Médio":"Florescem em duas cores, simbolizando transformação e beleza na natureza.","Fácil":"Suas flores mudam de cor com o tempo, encantando jardins com uma paleta vibrante e única."}},{"tema":"plantas","palavra":"VIOLETA","dicas":{"Difícil":"Delicada beleza em tons vibrantes.","Médio":"Delicada e colorida, floresce em ambientes internos com pouca luz.","Fácil":"Delicada e colorida, esta planta adora sombra e floresce em vasos, alegrando qualquer ambiente com beleza."}},{"tema":"plantas","palavra":"FIGUEIRA","dicas":{"Difícil":"Raízes aéreas e folhas largas.","Médio":"Símbolo de sabedoria, suas raízes profundas sustentam uma vasta copa.","Fácil":"Suas raízes são profundas e seus galhos oferecem sombra, simbolizando força e proteção na natureza."}},{"tema":"plantas","palavra":"CRAVO","dicas":{"Difícil":"Perfume intenso e pétalas vibrantes.","Médio":"Perfume intenso e pétalas vibrantes, símbolo de amor e paixão.","Fácil":"É uma flor que simboliza amor e admiração, frequentemente usada em celebrações e homenagens."}},{"tema":"animais","palavra":"CAPIVARA","dicas":{"Difícil":"Gosta de nadar em rios.","Médio":"Habita áreas alagadas, é roedor e adora nadar em grupo.","Fácil":"Este animal é o maior roedor do mundo e adora nadar em rios e lagos."}},{"tema":"animais","palavra":"TAMANDUÁ","dicas":{"Difícil":"Língua longa explora formigueiros silenciosamente.","Médio":"Ele adora formigas e tem um focinho bem comprido.","Fácil":"Com um focinho longo e língua pegajosa, adora explorar formigueiros e cupinzeiros em busca de alimento."}},{"tema":"animais","palavra":"ONÇA-PINTADA","dicas":{"Difícil":"Caçador furtivo da floresta tropical.","Médio":"Mestre das florestas, seu manto dourado exibe manchas negras.","Fácil":"Mestre das florestas, com pelagem dourada e manchas negras, desliza silenciosamente sob a luz da lua."}},{"tema":"animais","palavra":"PAPAGAIO","dicas":{"Difícil":"Cores vibrantes e fala imitativa.","Médio":"Adora imitar sons, tem penas coloridas e vive em florestas.","Fácil":"Este animal colorido e falante é conhecido por imitar sons e palavras com grande habilidade."}},{"tema":"animais","palavra":"TARTARUGA","dicas":{"Difícil":"Casco duro, movimento bem lento.","Médio":"Lento viajante com casa nas costas, vive em águas calmas.","Fácil":"Este animal é conhecido por sua casca dura e movimento lento, vivendo tanto na água quanto em terra."}},{"tema":"animais","palavra":"TIGRE","dicas":{"Difícil":"Listras laranjas e olhar feroz.","Médio":"Listras majestosas percorrem a selva com passos silenciosos e poderosos.","Fácil":"Majestoso e listrado, este felino é um caçador solitário que reina nas florestas densas."}},{"tema":"animais","palavra":"ELEFANTE","dicas":{"Difícil":"Grande, cinza, tromba, orelhas, savana.","Médio":"Gigante gentil da savana, com tromba e grandes orelhas.","Fácil":"Com orelhas grandes e tromba longa, este gigante cinza é conhecido por sua memória incrível."}},{"tema":"animais","palavra":"CACHORRO","dicas":{"Difícil":"Companheiro leal de quatro patas.","Médio":"Adora correr, é leal, e sempre abana o rabo feliz.","Fácil":"É um companheiro leal, adora brincar ao ar livre e é conhecido por sua fidelidade inabalável."}},{"tema":"animais","palavra":"GATO","dicas":{"Difícil":"Adora ronronar e caçar ratos.","Médio":"Adora explorar, ronrona suavemente e aprecia longos cochilos ao sol.","Fácil":"Este animal adora explorar, tem bigodes elegantes e é conhecido por sua curiosidade inata."}},{"tema":"animais","palavra":"GIRAFA","dicas":{"Difícil":"Pescoço longo alcança folhas altas.","Médio":"Alto habitante das savanas, com pescoço que toca o céu.","Fácil":"Com pescoço longo e manchas únicas, este animal majestoso alcança as folhas mais altas das árvores."}},{"tema":"animais","palavra":"ARARA","dicas":{"Difícil":"Penas coloridas em árvores tropicais.","Médio":"Vive em florestas tropicais, é colorida e adora voar alto.","Fácil":"Colorido e falante, este pássaro tropical é conhecido por suas penas vibrantes e habilidades de imitação."}},{"tema":"animais","palavra":"PINGUIM","dicas":{"Difícil":"Gosta de gelo e desliza.","Médio":"Vive em regiões geladas, veste um elegante traje preto e branco.","Fácil":"Este animal elegante veste um terno preto e branco e adora deslizar no gelo gelado."}},{"tema":"animais","palavra":"ANTA","dicas":{"Difícil":"Grande mamífero herbívoro da floresta.","Médio":"Habita florestas tropicais, é herbívoro e possui um focinho flexível.","Fácil":"Este animal é conhecido por sua aparência robusta e habita florestas tropicais da América do Sul."}},{"tema":"animais","palavra":"BALEIA","dicas":{"Difícil":"Gigante do oceano, canta profundo.","Médio":"Gigante dos mares, canta e dança nas profundezas azuis vastas.","Fácil":"Este gigante dos oceanos canta melodias subaquáticas e é conhecido por suas impressionantes acrobacias aquáticas."}},{"tema":"animais","palavra":"LEÃO","dicas":{"Difícil":"Rei da savana, juba majestosa.","Médio":"Rei da savana, sua juba majestosa impõe respeito absoluto.","Fácil":"Rei da savana, sua juba majestosa e rugido poderoso ecoam pela vastidão dourada do habitat."}},{"tema":"animais","palavra":"GOLFINHO","dicas":{"Difícil":"Salta alegremente nas ondas azuis.","Médio":"Nadador ágil, inteligente, adora saltar e vive em grupos sociais.","Fácil":"Este animal marinho é conhecido por sua inteligência, saltos acrobáticos e comunicação através de sons subaquáticos."}},{"tema":"animais","palavra":"ZEBRA","dicas":{"Difícil":"Listras pretas em fundo branco.","Médio":"Listras pretas e brancas, savanas africanas, parentes dos cavalos.","Fácil":"Este animal é conhecido por suas listras únicas e vive em savanas africanas em grupos sociais."}},{"tema":"animais","palavra":"SURICATA","dicas":{"Difícil":"Vigilante do deserto, sempre alerta.","Médio":"Vive em grupos, é vigilante e adora ficar em pé.","Fácil":"Este animal vive em grupos, é conhecido por sua postura ereta e habita regiões desérticas africanas."}},{"tema":"animais","palavra":"PANDA","dicas":{"Difícil":"Bambu é seu prato favorito.","Médio":"Adora bambu e tem uma pelagem preta e branca marcante.","Fácil":"Este animal adora bambu, é preto e branco, e vive em florestas asiáticas montanhosas."}},{"tema":"animais","palavra":"PAVÃO","dicas":{"Difícil":"Cores vibrantes em exibição majestosa.","Médio":"Suas penas vibrantes dançam ao sol, exibindo beleza e majestade.","Fácil":"Com penas exuberantes e uma dança hipnotizante, encanta com seu leque colorido em exibições majestosas."}},{"tema":"animais","palavra":"PREGUIÇA","dicas":{"Difícil":"Movimento lento nas copas verdes.","Médio":"Movimento lento, vida nas árvores, sorriso tranquilo e olhar sereno.","Fácil":"Este animal é conhecido por seu ritmo tranquilo e passa a maior parte do tempo descansando."}},{"tema":"animais","palavra":"TUCANO","dicas":{"Difícil":"Bico colorido em florestas tropicais.","Médio":"Colorido e tropical, seu bico é destaque na floresta verde.","Fácil":"Com bico colorido e vibrante, habita florestas tropicais, destacando-se entre as copas das árvores."}},{"tema":"animais","palavra":"LOBO","dicas":{"Difícil":"Uiva sob a luz prateada.","Médio":"Uiva para a lua e vive em matilhas na floresta.","Fácil":"Habita florestas e montanhas, uiva para a lua e vive em grupos chamados alcateias."}},{"tema":"animais","palavra":"JACARÉ","dicas":{"Difícil":"Mora em rios e pântanos.","Médio":"Habita águas doces, possui dentes afiados e pele escamosa.","Fácil":"Este réptil aquático possui uma mandíbula poderosa e é conhecido por sua pele escamosa e resistente."}},{"tema":"animais","palavra":"ORNITORRINCO","dicas":{"Difícil":"Bico de pato, cauda castor.","Médio":"Tem bico de pato, põe ovos e vive na água.","Fácil":"Este animal único combina características de aves, répteis e mamíferos, desafiando classificações tradicionais da natureza."}},{"tema":"animais","palavra":"ARARAQUARA","dicas":{"Difícil":"Plumagem vibrante sobrevoa cidade encantadora.","Médio":"Colorido e falante, encontra-se em uma cidade do interior paulista.","Fácil":"Colorido e falante, este habitante das florestas tropicais também compartilha seu nome com uma cidade paulista."}},{"tema":"animais","palavra":"TATU","dicas":{"Difícil":"Casco duro, escava na terra.","Médio":"Possui casco resistente, escava tocas e é mestre em se esconder.","Fácil":"Com armadura natural, este pequeno escavador noturno é mestre em criar túneis sob a terra."}},{"tema":"animais","palavra":"BICHO-PREGUIÇA","dicas":{"Difícil":"Movimento lento nas copas verdes.","Médio":"Movimenta-se lentamente entre as árvores, apreciando cada momento de calma.","Fácil":"Este animal é conhecido por sua lentidão e passa a maior parte do tempo em árvores."}},{"tema":"aves","palavra":"PAPAGAIO","dicas":{"Difícil":"Imita sons com cores vibrantes.","Médio":"Colorido e falante, imita sons e adora viver em bando.","Fácil":"Colorido e falante, este pássaro é conhecido por imitar sons e viver em florestas tropicais."}},{"tema":"aves","palavra":"ARARA","dicas":{"Difícil":"Cores vibrantes em florestas tropicais brasileiras.","Médio":"Colorido e falante, habita florestas tropicais com plumagem vibrante e exótica.","Fácil":"Colorida e barulhenta, essa ave tropical é conhecida por sua habilidade em imitar sons e palavras."}},{"tema":"aves","palavra":"PAPAGAIO-DO-MAR","dicas":{"Difícil":"Colorido, bico laranja, habitat costeiro.","Médio":"Colorido e ágil, habita penhascos e é mestre na pesca.","Fácil":"Com bico colorido e habitat costeiro, esta ave encanta com suas habilidades de mergulho e voo."}},{"tema":"aves","palavra":"PAPAGAIO-CHARÃO","dicas":{"Difícil":"Verde, fala, vive no sul.","Médio":"Verde vibrante, habitat sulista, adora pinhões e é bem falante.","Fácil":"Essa ave adora pinhões e é conhecida por sua plumagem verde vibrante e bico forte."}},{"tema":"aves","palavra":"PAPAGAIO-VERDADEIRO","dicas":{"Difícil":"Verde, fala, penas, Brasil, inteligente.","Médio":"Colorido e falante, adora repetir sons e vive em florestas.","Fácil":"Colorido e falante, este pássaro é conhecido por sua habilidade de imitar sons e palavras humanas."}},{"tema":"aves","palavra":"AVESTRUZ","dicas":{"Difícil":"Corre rápido, mas não voa.","Médio":"Grande e veloz, enterra a cabeça quando se sente ameaçada.","Fácil":"É a maior ave do mundo, conhecida por sua velocidade e incapacidade de voar."}},{"tema":"aves","palavra":"PAPAGAIO-DE-CARA-ROXA","dicas":{"Difícil":"Ilha, cores vibrantes, canto alegre.","Médio":"Habita ilhas brasileiras, destacando-se por sua vibrante plumagem facial colorida.","Fácil":"Habita ilhas do Atlântico Sul, possui plumagem vibrante e é conhecido por sua habilidade vocal impressionante."}},{"tema":"aves","palavra":"CANÁRIO","dicas":{"Difícil":"Canta alegremente em sua gaiola.","Médio":"Pequeno cantor amarelo, famoso por sua melodia alegre e vibrante.","Fácil":"Uma pequena criatura amarela, conhecida por seu canto melodioso, frequentemente encontrada em gaiolas domésticas."}},{"tema":"aves","palavra":"PARDAL","dicas":{"Difícil":"Pequeno cantor de penas marrons.","Médio":"Pequeno cantor urbano, frequentemente visto em praças e jardins movimentados.","Fácil":"Pequeno cantor urbano, frequentemente visto em bandos, adaptando-se facilmente a ambientes humanos e cidades movimentadas."}},{"tema":"aves","palavra":"BEIJA-FLOR","dicas":{"Difícil":"Pequena, colorida, rápida e nectarífera.","Médio":"Pequena criatura alada, rápida e colorida, adora flores e néctar.","Fácil":"Pequena criatura alada, conhecida por seu voo ágil e habilidade de pairar enquanto se alimenta."}},{"tema":"aves","palavra":"CALOPSITA","dicas":{"Difícil":"Cores vibrantes e canto encantador.","Médio":"Cores vibrantes e canto melodioso, companheiro de penas encantadoramente dócil.","Fácil":"Com penas vibrantes e crista distinta, encanta com seu canto melodioso e personalidade amigável."}},{"tema":"aves","palavra":"FLAMINGO","dicas":{"Difícil":"Cor-de-rosa, pernas longas, elegância tropical.","Médio":"Pernas longas e cor vibrante, dança elegante sob o sol tropical.","Fácil":"Com penas rosadas e pernas longas, esta ave adora águas rasas e se alimenta de crustáceos."}},{"tema":"aves","palavra":"COLIBRI","dicas":{"Difícil":"Pequeno e ágil, cores vibrantes.","Médio":"Pequena criatura alada, conhecida por seu voo rápido e vibrante.","Fácil":"Pequena criatura alada, conhecida por sua habilidade de pairar e sugar néctar com precisão incrível."}},{"tema":"aves","palavra":"CORUJA","dicas":{"Difícil":"Olhos grandes, sábia e noturna.","Médio":"Olhos grandes e noturnos, sábia guardiã dos segredos da noite.","Fácil":"Mestre da noite, com olhos grandes e sabedoria antiga, voa silenciosamente entre as sombras misteriosas."}},{"tema":"aves","palavra":"PICA-PAU","dicas":{"Difícil":"Bate em troncos com frequência.","Médio":"Bate com o bico em troncos, procurando insetos para comer.","Fácil":"Essa ave é conhecida por seu som característico ao bater em troncos com seu bico forte."}},{"tema":"aves","palavra":"ARARAQUÃ","dicas":{"Difícil":"Plumagem vibrante em florestas tropicais.","Médio":"Colorido e barulhento, habita florestas tropicais com plumagem vibrante e exótica.","Fácil":"Colorida e exuberante, essa ave amazônica é conhecida por seu canto alto e presença marcante."}},{"tema":"aves","palavra":"PERIQUITO","dicas":{"Difícil":"Colorido, pequeno, adora sementes tropicais.","Médio":"Colorido e falante, adora socializar e vive em bando alegremente.","Fácil":"Colorido e alegre, este pequeno pássaro é conhecido por sua habilidade em imitar sons variados."}},{"tema":"aves","palavra":"PAPAGAIO-DO-MANGUE","dicas":{"Difícil":"Verde vibrante, habitat costeiro, falante.","Médio":"Habita áreas costeiras, é colorido e imita sons com habilidade incrível.","Fácil":"Habita áreas costeiras, possui plumagem verde vibrante e é conhecido por sua habilidade de imitar sons."}},{"tema":"aves","palavra":"GARÇA","dicas":{"Difícil":"Pernas longas, pescoço elegante, voo.","Médio":"Elegante caçadora de águas rasas, desliza silenciosamente em busca de peixes.","Fácil":"Com pernas longas e elegância serena, ela pesca em águas rasas, exibindo plumagem branca e graciosa."}},{"tema":"frutas","palavra":"AMEIXA","dicas":{"Difícil":"Roxa, doce, vira fruta seca.","Médio":"Pequena e roxa, pode ser comida fresca ou também seca.","Fácil":"Tem casca roxa e polpa amarelada, muito usada seca em pudins e na ceia natalina."}},{"tema":"frutas","palavra":"FIGO","dicas":{"Difícil":"Doce, roxo, cheio de sementinhas.","Médio":"Roxo por fora, vermelho por dentro, delicioso em doces caseiros.","Fácil":"Fruta de casca roxa e interior vermelho cheio de sementes, famosa em compotas e doces."}},{"tema":"frutas","palavra":"ROMÃ","dicas":{"Difícil":"Cheia de sementes vermelhas brilhantes.","Médio":"Sua casca dura e avermelhada esconde centenas de sementes suculentas.","Fácil":"No Ano-Novo, muitos guardam suas sementes vermelhas na carteira para atrair prosperidade o ano todo."}},{"tema":"frutas","palavra":"LICHIA","dicas":{"Difícil":"Casca rugosa, polpa branca perfumada.","Médio":"Pequena fruta asiática de casca vermelha rugosa e polpa branca.","Fácil":"Originária da China, tem casca vermelha e áspera, polpa branca translúcida e um caroço marrom."}},{"tema":"frutas","palavra":"PITAIA","dicas":{"Difícil":"Casca rosa com escamas verdes.","Médio":"Casca rosa com escamas, polpa branca ou roxa com sementinhas.","Fácil":"Chamada de fruta-do-dragão, vem de um cacto e tem polpa cheia de sementinhas pretas crocantes."}},{"tema":"frutas","palavra":"CUPUAÇU","dicas":{"Difícil":"Amazônica, parente do cacau, azedinha.","Médio":"Fruta amazônica de casca marrom, polpa branca e aroma marcante.","Fácil":"Prima do cacau, esta fruta da Amazônia vira sucos, cremes e um chocolate chamado cupulate."}},{"tema":"frutas","palavra":"CAQUI","dicas":{"Difícil":"Laranja, macia, parece um tomate.","Médio":"Parece um tomate laranja, é muito doce e bem macio.","Fácil":"De origem asiática, lembra um tomate alaranjado e fica muito doce e mole quando maduro."}},{"tema":"frutas","palavra":"MELÃO","dicas":{"Difícil":"Casca amarela, polpa clara refrescante.","Médio":"De casca amarela ou verde, com polpa doce e clara.","Fácil":"Parente da melancia, tem casca amarela ou rendada e polpa clara, doce e bem suculenta."}},{"tema":"frutas","palavra":"MIRTILO","dicas":{"Difícil":"Pequena, azul, cheia de antioxidantes.","Médio":"Pequena bolinha azul-escura, muito usada em muffins, iogurtes e vitaminas.","Fácil":"Chamada de blueberry, esta pequena fruta azul é rica em antioxidantes e usada em muffins."}},{"tema":"frutas","palavra":"TAMARINDO","dicas":{"Difícil":"Vagem marrom, polpa azeda grudenta.","Médio":"Vagem marrom com polpa agridoce, usada em sucos e balas.","Fácil":"Cresce em vagens de casca quebradiça e sua polpa agridoce vira sucos, molhos e doces."}},{"tema":"frutas","palavra":"SERIGUELA","dicas":{"Difícil":"Pequena, vermelha, nordestina e azedinha.","Médio":"Pequena fruta nordestina, vermelha quando madura, com caroço bem grande.","Fácil":"Típica do Nordeste, esta frutinha fica vermelha ao amadurecer e tem sabor agridoce bem marcante."}},{"tema":"frutas","palavra":"CAJÁ","dicas":{"Difícil":"Amarela, pequena, azeda e perfumada.","Médio":"Pequena e amarela, muito azeda, faz um suco nordestino delicioso.","Fácil":"Fruta amarela de sabor bem ácido, muito apreciada em sucos, sorvetes e picolés no Nordeste."}},{"tema":"frutas","palavra":"UMBU","dicas":{"Difícil":"Fruta do sertão, azedinha, verde.","Médio":"Pequena, verde e azedinha, nasce numa árvore resistente do sertão.","Fácil":"Vem de árvore da caatinga que guarda água nas raízes e alimenta sertanejos na seca."}},{"tema":"frutas","palavra":"BURITI","dicas":{"Difícil":"Casca escamosa, polpa laranja, palmeira.","Médio":"Fruto de palmeira, casca com escamas marrons e polpa alaranjada.","Fácil":"Fruto de palmeira das veredas, tem casca escamosa e polpa laranja rica em vitamina A."}},{"tema":"frutas","palavra":"BACURI","dicas":{"Difícil":"Amazônica, casca grossa, polpa branca.","Médio":"Fruta amazônica de casca amarela e grossa, com polpa branca.","Fácil":"Apreciada no Pará e Maranhão, tem casca grossa amarela e polpa branca usada em sorvetes."}},{"tema":"frutas","palavra":"PEQUI","dicas":{"Difícil":"Cuidado: tem espinhos no caroço.","Médio":"Fruto amarelo do cerrado, cheiro forte e espinhos no caroço.","Fácil":"Símbolo do cerrado goiano, tem polpa amarela de cheiro forte e caroço cheio de espinhos."}},{"tema":"frutas","palavra":"JENIPAPO","dicas":{"Difícil":"Seu suco vira tinta escura.","Médio":"Indígenas usam seu suco para pintar a pele de preto.","Fácil":"Fruto cujo suco escurece a pele, usado em pinturas indígenas e licores de festas juninas."}},{"tema":"frutas","palavra":"NECTARINA","dicas":{"Difícil":"Parece pêssego, mas sem penugem.","Médio":"Prima do pêssego, tem casca lisa, avermelhada e polpa suculenta.","Fácil":"Muito parecida com o pêssego, mas de casca lisa e brilhante, sem aquela penugem aveludada."}},{"tema":"frutas","palavra":"DAMASCO","dicas":{"Difícil":"Laranja, aveludada, famosa quando seca.","Médio":"Pequena e alaranjada, é muito consumida seca em ceias festivas.","Fácil":"Fruta alaranjada de casca aveludada, muito vendida seca e usada em pratos árabes e natalinos."}},{"tema":"frutas","palavra":"TORANJA","dicas":{"Difícil":"Cítrica grande, levemente amarga, rosada.","Médio":"Cítrica grande, de polpa rosada e sabor ácido levemente amargo.","Fácil":"Chamada de grapefruit, é uma cítrica grande de polpa rosada, sabor ácido e fundo amargo."}},{"tema":"plantas","palavra":"ALECRIM","dicas":{"Difícil":"Erva aromática que tempera assados.","Médio":"Folhas finas e perfumadas, tempera carnes, batatas e é chá.","Fácil":"Arbusto de folhas finas como agulhas, muito aromático, usado para temperar assados e preparar chás."}},{"tema":"plantas","palavra":"LAVANDA","dicas":{"Difícil":"Flores roxas de perfume calmante.","Médio":"Seus campos roxos perfumam a Provença e acalmam o sono.","Fácil":"Flores roxas e perfume suave, famosa nos campos franceses e usada em sabonetes e óleos."}},{"tema":"plantas","palavra":"CACTO","dicas":{"Difícil":"Espinhos e pouca água necessária.","Médio":"Vive no deserto, tem espinhos e guarda água no caule.","Fácil":"Típico de regiões secas, troca folhas por espinhos e armazena água no caule para sobreviver."}},{"tema":"plantas","palavra":"BAMBU","dicas":{"Difícil":"Caule oco, cresce muito rápido.","Médio":"Caule oco e resistente, é o alimento preferido dos pandas.","Fácil":"Tem caule oco e segmentado, cresce rapidíssimo e serve para construções, móveis e alimentar pandas."}},{"tema":"plantas","palavra":"MANDACARU","dicas":{"Difícil":"Cacto símbolo do sertão nordestino.","Médio":"Cacto alto do sertão, quando floresce anuncia que vem chuva.","Fácil":"Cacto da caatinga, cantado por Luiz Gonzaga, cuja flor branca indica chuva chegando ao sertão."}},{"tema":"plantas","palavra":"VITÓRIA-RÉGIA","dicas":{"Difícil":"Folha gigante flutua na Amazônia.","Médio":"Folha redonda e enorme que flutua nos rios da Amazônia.","Fácil":"Planta aquática amazônica com folhas circulares gigantes que flutuam, ligada a uma linda lenda indígena."}},{"tema":"plantas","palavra":"LÍRIO","dicas":{"Difícil":"Flor elegante, símbolo de pureza.","Médio":"Flor grande e perfumada, frequentemente branca, simboliza pureza e paz.","Fácil":"Flor de pétalas grandes em forma de trombeta, perfumada e associada à pureza em casamentos."}},{"tema":"plantas","palavra":"TULIPA","dicas":{"Difícil":"Flor famosa dos campos holandeses.","Médio":"Flor em forma de taça, símbolo dos campos coloridos holandeses.","Fácil":"Nasce de bulbo, tem flores em taça e valeu fortunas na Holanda do século dezessete."}},{"tema":"plantas","palavra":"MARGARIDA","dicas":{"Difícil":"Pétalas brancas, miolo amarelo, simples.","Médio":"Tem pétalas brancas e miolo amarelo, usada no jogo bem-me-quer.","Fácil":"Flor de pétalas brancas e centro amarelo, usada para arrancar pétalas no jogo do bem-me-quer."}},{"tema":"plantas","palavra":"HIBISCO","dicas":{"Difícil":"Flor grande, vira chá vermelho.","Médio":"Flor tropical grande e vistosa, seu chá avermelhado é famoso.","Fácil":"Flor tropical de pétalas largas e vistosas, usada em colares havaianos e em chás avermelhados."}},{"tema":"plantas","palavra":"ANTÚRIO","dicas":{"Difícil":"Flor vermelha brilhante em coração.","Médio":"Flor vermelha em forma de coração, parece feita de plástico.","Fácil":"Planta de interior com folhas verdes e uma estrutura vermelha brilhante em forma de coração."}},{"tema":"plantas","palavra":"COSTELA-DE-ADÃO","dicas":{"Difícil":"Folhas grandes com furos recortados.","Médio":"Planta de folhas enormes e recortadas, queridinha da decoração moderna.","Fácil":"Trepadeira tropical de folhas grandes cheias de furos e recortes, que lembram ossos do peito."}},{"tema":"plantas","palavra":"ESPADA-DE-SÃO-JORGE","dicas":{"Difícil":"Folhas longas, pontudas, contra mau-olhado.","Médio":"Folhas rígidas e pontudas, muitos acreditam que protege contra mau-olhado.","Fácil":"Planta de folhas longas e rígidas como lâminas, colocada na porta para afastar energias negativas."}},{"tema":"plantas","palavra":"PAU-BRASIL","dicas":{"Difícil":"Árvore que batizou nosso país.","Médio":"Árvore de madeira avermelhada que deu nome ao nosso país.","Fácil":"Árvore da Mata Atlântica, explorada pelos portugueses pelo corante vermelho e que batizou o país."}},{"tema":"plantas","palavra":"CARVALHO","dicas":{"Difícil":"Árvore robusta que produz bolotas.","Médio":"Árvore grande e robusta, de madeira nobre, que produz bolotas.","Fácil":"Árvore de vida longa e madeira resistente, usada em barris de vinho, que produz bolotas."}},{"tema":"plantas","palavra":"MANDIOCA","dicas":{"Difícil":"Raiz que vira farinha brasileira.","Médio":"Raiz chamada de aipim ou macaxeira, vira farinha e tapioca.","Fácil":"Raiz de casca marrom e interior branco, base da culinária indígena, vira farinha e tapioca."}},{"tema":"plantas","palavra":"SALSINHA","dicas":{"Difícil":"Tempero verde parceiro da cebolinha.","Médio":"Erva verde de folhas recortadas, forma o cheiro-verde com cebolinha.","Fácil":"Erva de folhas verdes e recortadas, salpicada sobre pratos e parceira da cebolinha no cheiro-verde."}},{"tema":"plantas","palavra":"ERVA-MATE","dicas":{"Difícil":"Folhas do chimarrão e tereré.","Médio":"Suas folhas preparam o chimarrão gaúcho e o tereré gelado.","Fácil":"Nativa do sul, suas folhas secas preparam o chimarrão quente e também o tereré gelado."}},{"tema":"plantas","palavra":"BUGANVÍLIA","dicas":{"Difícil":"Trepadeira de flores coloridas vibrantes.","Médio":"Trepadeira espinhosa cobre muros com cores roxas, rosas e vermelhas.","Fácil":"Também chamada de primavera, esta trepadeira espinhosa cobre muros e pérgolas com brácteas coloridas vibrantes."}},{"tema":"plantas","palavra":"COPO-DE-LEITE","dicas":{"Difícil":"Flor branca elegante em cálice.","Médio":"Flor branca em formato de cálice, muito usada em buquês.","Fácil":"Flor branca que se enrola como um cálice, comum em buquês de noiva, porém tóxica."}},{"tema":"animais","palavra":"CAVALO","dicas":{"Difícil":"Galopa, relincha e tem crina.","Médio":"Animal de crina e cascos, relincha e galopa pelos campos.","Fácil":"Animal forte e veloz, com crina e cascos, foi o meio de transporte por séculos."}},{"tema":"animais","palavra":"VACA","dicas":{"Difícil":"Faz muu e dá leite.","Médio":"Animal da fazenda que faz muu e produz leite diariamente.","Fácil":"Ruminante da fazenda, muitas vezes malhada, que muge e fornece o leite do nosso café."}},{"tema":"animais","palavra":"COELHO","dicas":{"Difícil":"Orelhas longas, adora comer cenoura.","Médio":"Tem orelhas compridas, pula bastante e é símbolo da Páscoa.","Fácil":"Mamífero de orelhas compridas e rabo de algodão, salta, adora cenoura e simboliza a Páscoa."}},{"tema":"animais","palavra":"MACACO","dicas":{"Difícil":"Adora banana e pular galhos.","Médio":"Primata ágil que pula entre galhos e adora comer banana.","Fácil":"Primata brincalhão e inteligente, usa as mãos e a cauda para se pendurar nos galhos."}},{"tema":"animais","palavra":"URSO","dicas":{"Difícil":"Grande, peludo, hiberna no inverno.","Médio":"Mamífero grande e peludo, adora mel e hiberna no inverno.","Fácil":"Mamífero grande, de pelagem espessa, que pesca salmões, adora mel e passa o inverno hibernando."}},{"tema":"animais","palavra":"CANGURU","dicas":{"Difícil":"Salta alto e carrega bolsa.","Médio":"Marsupial australiano que salta e carrega o filhote na bolsa.","Fácil":"Símbolo da Austrália, este marsupial dá saltos enormes e leva o filhote dentro da bolsa."}},{"tema":"animais","palavra":"COALA","dicas":{"Difícil":"Dorme muito e come eucalipto.","Médio":"Marsupial fofinho da Austrália, come eucalipto e dorme quase sempre.","Fácil":"Marsupial de pelagem cinza e orelhas peludas, vive abraçado às árvores comendo folhas de eucalipto."}},{"tema":"animais","palavra":"CAMELO","dicas":{"Difícil":"Corcovas e resistência no deserto.","Médio":"Animal do deserto com duas corcovas, aguenta dias sem água.","Fácil":"Conhecido como navio do deserto, tem duas corcovas de gordura e resiste dias sem água."}},{"tema":"animais","palavra":"RINOCERONTE","dicas":{"Difícil":"Pele grossa e chifre nasal.","Médio":"Mamífero enorme de pele grossa, com chifres sobre o focinho.","Fácil":"Herbívoro africano e asiático de pele espessa, ameaçado pela caça ilegal por causa do chifre."}},{"tema":"animais","palavra":"HIPOPÓTAMO","dicas":{"Difícil":"Gigante que vive nos rios.","Médio":"Mamífero enorme africano que passa o dia dentro dos rios.","Fácil":"Mamífero africano de boca gigante, passa o dia submerso em rios e é surpreendentemente perigoso."}},{"tema":"animais","palavra":"RAPOSA","dicas":{"Difícil":"Astuta, cauda peluda, focinho fino.","Médio":"Animal astuto de pelagem alaranjada, cauda peluda e focinho pontudo.","Fácil":"Famosa nas fábulas pela esperteza, tem pelagem avermelhada, orelhas pontudas e cauda longa e peluda."}},{"tema":"animais","palavra":"ESQUILO","dicas":{"Difícil":"Guarda nozes, cauda bem peluda.","Médio":"Roedor de cauda peluda que guarda nozes para o inverno.","Fácil":"Pequeno roedor ágil de cauda volumosa, sobe em árvores e enterra nozes para comer depois."}},{"tema":"animais","palavra":"MORCEGO","dicas":{"Difícil":"Mamífero voador que dorme pendurado.","Médio":"Mamífero voador que dorme de cabeça para baixo em cavernas.","Fácil":"O único mamífero capaz de voar, é noturno, usa ecolocalização e descansa pendurado de ponta-cabeça."}},{"tema":"animais","palavra":"POLVO","dicas":{"Difícil":"Oito braços e solta tinta.","Médio":"Animal marinho de oito braços com ventosas que solta tinta.","Fácil":"Molusco marinho inteligente, tem oito tentáculos com ventosas, três corações e solta tinta para fugir."}},{"tema":"animais","palavra":"TUBARÃO","dicas":{"Difícil":"Predador do mar, barbatana dorsal.","Médio":"Predador dos oceanos com fileiras de dentes e barbatana dorsal.","Fácil":"Peixe predador de esqueleto cartilaginoso, com fileiras de dentes e barbatana que corta a superfície."}},{"tema":"animais","palavra":"COBRA","dicas":{"Difícil":"Rasteja sem patas e sibila.","Médio":"Réptil sem patas que rasteja, troca de pele e sibila.","Fácil":"Réptil de corpo alongado sem patas, troca de pele, sibila e algumas espécies são venenosas."}},{"tema":"animais","palavra":"SAPO","dicas":{"Difícil":"Coaxa e pula na lagoa.","Médio":"Anfíbio que coaxa, pula e come insetos com língua grudenta.","Fácil":"Anfíbio de pele rugosa, nasce girino, coaxa à noite e caça insetos com a língua."}},{"tema":"animais","palavra":"ABELHA","dicas":{"Difícil":"Produz mel e pode picar.","Médio":"Inseto que produz mel, poliniza flores e vive na colmeia.","Fácil":"Inseto amarelo e preto, vive em colmeias, produz mel e é essencial para polinizar plantas."}},{"tema":"animais","palavra":"BORBOLETA","dicas":{"Difícil":"Asas coloridas, antes foi lagarta.","Médio":"Inseto de asas coloridas que antes foi lagarta e casulo.","Fácil":"Inseto de asas coloridas que passa por metamorfose, de lagarta a casulo, até poder voar."}},{"tema":"animais","palavra":"PEIXE-BOI","dicas":{"Difícil":"Mamífero aquático, lento e herbívoro.","Médio":"Mamífero aquático e calmo, come plantas em rios e mares.","Fácil":"Mamífero aquático dócil, ameaçado de extinção, vive na Amazônia e no litoral comendo plantas aquáticas."}},{"tema":"animais","palavra":"MICO-LEÃO-DOURADO","dicas":{"Difícil":"Pequeno primata de pelagem dourada.","Médio":"Macaco de pelagem dourada e juba, vive na Mata Atlântica.","Fácil":"Primata da Mata Atlântica com pelagem alaranjada e juba, símbolo da luta contra a extinção."}},{"tema":"animais","palavra":"LOBO-GUARÁ","dicas":{"Difícil":"Pernas longas, pelagem laranja, cerrado.","Médio":"Canídeo de pernas longas, estampado na nota de duzentos reais.","Fácil":"Maior canídeo da América do Sul, tem pelagem alaranjada, pernas longas e vive no cerrado."}},{"tema":"aves","palavra":"ÁGUIA","dicas":{"Difícil":"Ave de rapina, visão aguçada.","Médio":"Ave de rapina poderosa, voa alto e tem visão impressionante.","Fácil":"Ave de rapina com garras e visão aguçada, símbolo de poder em brasões e bandeiras."}},{"tema":"aves","palavra":"GAVIÃO","dicas":{"Difícil":"Rapina menor, caça em voo.","Médio":"Ave de rapina que caça pequenos animais com garras afiadas.","Fácil":"Ave de rapina de porte médio, que mergulha rapidamente do céu para capturar pequenos animais."}},{"tema":"aves","palavra":"URUBU","dicas":{"Difícil":"Ave preta que come carniça.","Médio":"Ave preta que plana e se alimenta de animais mortos.","Fácil":"Ave preta de cabeça pelada que plana em círculos e limpa a natureza comendo carniça."}},{"tema":"aves","palavra":"FALCÃO","dicas":{"Difícil":"Ave mais rápida do mundo.","Médio":"Ave de rapina veloz, usada em caça esportiva por séculos.","Fácil":"Ave de rapina que passa de trezentos quilômetros por hora mergulhando, o animal mais rápido."}},{"tema":"aves","palavra":"POMBO","dicas":{"Difícil":"Comum nas praças, arrulha muito.","Médio":"Ave cinzenta comum nas praças, já foi usada como mensageira.","Fácil":"Ave urbana cinzenta que arrulha nas praças e, no passado, levava mensagens entre cidades distantes."}},{"tema":"aves","palavra":"GALINHA","dicas":{"Difícil":"Bota ovos e cacareja muito.","Médio":"Ave do quintal que cacareja, cisca e bota ovos diariamente.","Fácil":"Ave doméstica que cacareja, cisca o terreiro em busca de grãos e fornece ovos frescos."}},{"tema":"aves","palavra":"PATO","dicas":{"Difícil":"Faz quá-quá e nada bem.","Médio":"Bico achatado, pés palmados, nada em lagos e faz quá-quá.","Fácil":"Ave de bico achatado e pés com membranas, nada em lagos e grasna fazendo quá-quá."}},{"tema":"aves","palavra":"GANSO","dicas":{"Difícil":"Grande, branco, ótimo vigia barulhento.","Médio":"Ave grande e barulhenta, ótima vigia de quintais e fazendas.","Fácil":"Ave maior que o pato, de pescoço longo, grasna alto e defende território com bravura."}},{"tema":"aves","palavra":"PERU","dicas":{"Difícil":"Ave típica da ceia natalina.","Médio":"Ave grande de papo vermelho, prato principal em ceias natalinas.","Fácil":"Ave grande que abre a cauda em leque, faz glu-glu e é servida no Natal."}},{"tema":"aves","palavra":"CISNE","dicas":{"Difícil":"Ave elegante de pescoço curvo.","Médio":"Ave aquática branca e elegante, de pescoço longo em curva.","Fácil":"Ave aquática elegante de pescoço longo e curvado, que inspirou um famoso balé de Tchaikovsky."}},{"tema":"aves","palavra":"GAIVOTA","dicas":{"Difícil":"Ave branca das praias, barulhenta.","Médio":"Ave marinha branca e cinza que sobrevoa praias e portos.","Fácil":"Ave marinha branca e cinzenta, sempre perto de praias e barcos, disputando restos de peixe."}},{"tema":"aves","palavra":"PELICANO","dicas":{"Difícil":"Bico com bolsa para peixes.","Médio":"Ave aquática com uma grande bolsa no bico para pescar.","Fácil":"Ave aquática que mergulha para pescar e guarda peixes numa bolsa elástica sob o bico."}},{"tema":"aves","palavra":"ANDORINHA","dicas":{"Difícil":"Migra em bandos, anuncia verão.","Médio":"Pequena ave de cauda bifurcada que migra em grandes bandos.","Fácil":"Ave de cauda bifurcada que migra em bandos; diz o ditado: sozinha não faz verão."}},{"tema":"aves","palavra":"SABIÁ","dicas":{"Difícil":"Canta bonito, ave nacional brasileira.","Médio":"Ave símbolo do Brasil, famosa pelo canto melodioso ao amanhecer.","Fácil":"Ave símbolo do Brasil, de peito alaranjado, cantada na Canção do Exílio de Gonçalves Dias."}},{"tema":"aves","palavra":"BEM-TE-VI","dicas":{"Difícil":"Grita o próprio nome alto.","Médio":"Peito amarelo, faixa branca na cabeça, canta o próprio nome.","Fácil":"Ave comum nas cidades, de peito amarelo e máscara preta, cujo canto repete seu nome."}},{"tema":"aves","palavra":"JOÃO-DE-BARRO","dicas":{"Difícil":"Constrói ninho de argila redondo.","Médio":"Pássaro marrom que constrói ninho de argila parecido com forno.","Fácil":"Pássaro marrom, símbolo da Argentina, ergue com lama e palha um ninho que lembra forno."}},{"tema":"aves","palavra":"QUERO-QUERO","dicas":{"Difícil":"Vigia gramados e ataca intrusos.","Médio":"Ave dos gramados que grita e defende seu ninho bravamente.","Fácil":"Ave comum em campos e estádios, tem esporões nas asas, grita e defende o ninho."}},{"tema":"aves","palavra":"SERIEMA","dicas":{"Difícil":"Pernas longas, canto alto, cerrado.","Médio":"Ave do cerrado de pernas longas, topete e canto escandaloso.","Fácil":"Ave do cerrado que prefere correr a voar, tem topete e canto ouvido de longe."}},{"tema":"aves","palavra":"EMA","dicas":{"Difícil":"Maior ave brasileira, não voa.","Médio":"Ave dos campos brasileiros que corre rápido mas não voa.","Fácil":"Maior ave das Américas, parente do avestruz, corre rápido e o macho choca os ovos."}},{"tema":"aves","palavra":"GRALHA-AZUL","dicas":{"Difícil":"Planta pinheiros enterrando seus pinhões.","Médio":"Ave símbolo do Paraná que enterra pinhões e planta araucárias.","Fácil":"Ave símbolo do Paraná, de cabeça preta, que esquece pinhões enterrados e assim planta araucárias."}},{"tema":"aves","palavra":"CORVO","dicas":{"Difícil":"Ave preta, inteligente e misteriosa.","Médio":"Ave toda preta, inteligente, associada a mistério e mau agouro.","Fácil":"Ave toda preta, considerada uma das mais inteligentes, famosa no poema de Edgar Allan Poe."}},{"tema":"aves","palavra":"CEGONHA","dicas":{"Difícil":"Dizem que traz os bebês.","Médio":"Ave de pernas longas que, segundo a lenda, entrega bebês.","Fácil":"Ave de pernas e bico longos que faz ninhos em telhados; na lenda, traz bebês."}},{"tema":"aves","palavra":"MARTIM-PESCADOR","dicas":{"Difícil":"Mergulha rápido para pegar peixes.","Médio":"Ave colorida de bico longo, mergulha em rios caçando peixes.","Fácil":"Ave de bico comprido que espera em galhos sobre rios e mergulha para capturar peixes."}},{"tema":"aves","palavra":"ALBATROZ","dicas":{"Difícil":"Maior envergadura entre as aves.","Médio":"Ave marinha de asas enormes que plana horas sobre oceanos.","Fácil":"Ave marinha de maior envergadura do mundo, plana milhares de quilômetros quase sem bater asas."}},{"tema":"aves","palavra":"CODORNA","dicas":{"Difícil":"Bota ovinhos pequenos e pintados.","Médio":"Ave de criação, seus ovos pintados viram petiscos em festas.","Fácil":"Pequena ave de penas marrons, criada em granjas por seus ovinhos pintados, servidos como petisco."}},{"tema":"aves","palavra":"CURIÓ","dicas":{"Difícil":"Pássaro preto de canto valorizado.","Médio":"Pequeno pássaro de canto famoso, macho preto com peito avermelhado.","Fácil":"Pequeno pássaro brasileiro de canto muito apreciado, cujo macho é preto com o peito castanho-avermelhado."}},{"tema":"aves","palavra":"UIRAPURU","dicas":{"Difícil":"Canto raro e mágico amazônico.","Médio":"Pássaro amazônico de canto tão belo que a floresta silencia.","Fácil":"Pássaro da Amazônia, protagonista de lendas, cujo canto raro faz os animais pararem para ouvir."}},{"tema":"aves","palavra":"HARPIA","dicas":{"Difícil":"Águia mais poderosa das Américas.","Médio":"Grande ave de rapina amazônica que caça macacos e preguiças.","Fácil":"Chamada gavião-real, é a ave de rapina mais poderosa do Brasil, com garras e penacho."}},{"tema":"aves","palavra":"CARCARÁ","dicas":{"Difícil":"Ave de rapina do sertão.","Médio":"Ave de rapina do sertão, com cara vermelha e topete.","Fácil":"Ave de rapina oportunista que anda pelo chão, de face avermelhada e um topete preto."}},{"tema":"aves","palavra":"TUIUIÚ","dicas":{"Difícil":"Ave símbolo do Pantanal mato-grossense.","Médio":"Ave símbolo do Pantanal, com pescoço preto e colar vermelho.","Fácil":"Grande cegonha do Pantanal, de corpo branco, cabeça preta e uma faixa vermelha no pescoço."}},{"tema":"lugar","palavra":"PRAIA","dicas":{"Difícil":"Areia, mar, sol e conchas.","Médio":"Areia e ondas, ótimo para tomar sol e construir castelos.","Fácil":"Faixa de areia à beira-mar onde pessoas tomam sol, mergulham nas ondas e constroem castelos."}},{"tema":"lugar","palavra":"ESCOLA","dicas":{"Difícil":"Lugar de aprender com professores.","Médio":"Lugar onde crianças estudam, fazem provas e brincam no recreio.","Fácil":"Tem salas de aula, quadro e carteiras, onde alunos aprendem com professores e fazem amigos."}},{"tema":"lugar","palavra":"HOSPITAL","dicas":{"Difícil":"Médicos cuidam dos doentes aqui.","Médio":"Lugar com médicos, enfermeiros e ambulâncias, onde cuidamos da saúde.","Fácil":"Funciona dia e noite com médicos e enfermeiros, recebendo ambulâncias e tratando doentes ou feridos."}},{"tema":"lugar","palavra":"BIBLIOTECA","dicas":{"Difícil":"Estantes cheias de livros, silêncio.","Médio":"Lugar silencioso com estantes de livros que podemos pegar emprestados.","Fácil":"Espaço cheio de estantes, onde é possível ler, estudar e levar livros emprestados para casa."}},{"tema":"lugar","palavra":"MUSEU","dicas":{"Difícil":"Guarda obras de arte antigas.","Médio":"Lugar que exibe obras de arte, fósseis e objetos históricos.","Fácil":"Edifício que preserva e exibe obras de arte, fósseis e objetos históricos para visitantes admirarem."}},{"tema":"lugar","palavra":"CINEMA","dicas":{"Difícil":"Tela grande, pipoca e escuro.","Médio":"Sala escura com tela gigante, onde assistimos filmes comendo pipoca.","Fácil":"Sala escura com poltronas e tela enorme, onde compramos ingresso para assistir filmes comendo pipoca."}},{"tema":"lugar","palavra":"TEATRO","dicas":{"Difícil":"Atores se apresentam no palco.","Médio":"Tem palco e cortinas, onde atores apresentam peças ao vivo.","Fácil":"Espaço com palco, plateia e cortinas vermelhas, onde atores encenam peças para o público aplaudir."}},{"tema":"lugar","palavra":"PADARIA","dicas":{"Difícil":"Cheiro de pão quentinho fresco.","Médio":"Onde compramos pão francês quentinho, bolos e café pela manhã.","Fácil":"Estabelecimento com forno aceso, que vende pão francês, sonhos, bolos e café com leite cedinho."}},{"tema":"lugar","palavra":"FARMÁCIA","dicas":{"Difícil":"Lugar para comprar remédios receitados.","Médio":"Onde compramos remédios, curativos, vitaminas e produtos de higiene pessoal.","Fácil":"Loja com uma cruz verde na fachada, onde compramos remédios receitados pelo médico e cosméticos."}},{"tema":"lugar","palavra":"SUPERMERCADO","dicas":{"Difícil":"Carrinho, prateleiras, caixa e compras.","Médio":"Lugar com carrinhos e corredores cheios de alimentos e produtos.","Fácil":"Loja com corredores, prateleiras e carrinhos, onde fazemos compras do mês e pagamos no caixa."}},{"tema":"lugar","palavra":"RESTAURANTE","dicas":{"Difícil":"Escolhemos pratos no cardápio aqui.","Médio":"Onde escolhemos pratos no cardápio e o garçom nos serve.","Fácil":"Estabelecimento com mesas, cardápio e cozinheiros, onde garçons servem refeições e depois pedimos a conta."}},{"tema":"lugar","palavra":"AEROPORTO","dicas":{"Difícil":"Aviões decolam e pousam aqui.","Médio":"Tem pistas, portões de embarque e aviões decolando sem parar.","Fácil":"Tem pistas, torre de controle e portões de embarque, onde fazemos check-in antes de voar."}},{"tema":"lugar","palavra":"RODOVIÁRIA","dicas":{"Difícil":"Ônibus partem para outras cidades.","Médio":"Terminal de onde partem e chegam ônibus para outras cidades.","Fácil":"Terminal com plataformas e guichês de passagens, de onde partem ônibus para viagens entre cidades."}},{"tema":"lugar","palavra":"ESTÁDIO","dicas":{"Difícil":"Torcida grita gol na arquibancada.","Médio":"Grande arena com arquibancadas, onde torcedores assistem jogos de futebol.","Fácil":"Enorme construção com gramado e arquibancadas, onde milhares de torcedores vibram com partidas de futebol."}},{"tema":"lugar","palavra":"PARQUE","dicas":{"Difícil":"Árvores, bancos, gramado e passeios.","Médio":"Área verde da cidade com árvores, bancos, lagos e brinquedos.","Fácil":"Área verde com árvores, bancos, trilhas e brinquedos, perfeita para piqueniques e caminhadas em família."}},{"tema":"lugar","palavra":"ZOOLÓGICO","dicas":{"Difícil":"Muitos animais em recintos cercados.","Médio":"Lugar onde visitamos leões, girafas e macacos de vários continentes.","Fácil":"Espaço que abriga animais de várias partes do mundo em recintos, para visitação e preservação."}},{"tema":"lugar","palavra":"IGREJA","dicas":{"Difícil":"Torre com sino e bancos.","Médio":"Sino, bancos e altar: lugar onde fiéis assistem à missa.","Fácil":"Templo cristão com torre, sino e vitrais, onde acontecem missas, batizados e casamentos aos domingos."}},{"tema":"lugar","palavra":"CASTELO","dicas":{"Difícil":"Morada de reis e rainhas.","Médio":"Fortaleza com torres, muralhas e fosso, onde moravam reis medievais.","Fácil":"Construção medieval com torres altas, muralhas e ponte levadiça, onde viviam reis, rainhas e princesas."}},{"tema":"lugar","palavra":"FLORESTA","dicas":{"Difícil":"Muitas árvores, sombra e animais.","Médio":"Área enorme coberta de árvores, onde vivem muitos animais selvagens.","Fácil":"Área coberta por árvores altas e vegetação densa, lar de inúmeros animais, como a Amazônia."}},{"tema":"lugar","palavra":"DESERTO","dicas":{"Difícil":"Areia, calor e pouca água.","Médio":"Lugar muito seco, com dunas de areia, cactos e camelos.","Fácil":"Região seca, quase sem chuva, com dunas de areia, dias escaldantes e noites bem frias."}},{"tema":"lugar","palavra":"MONTANHA","dicas":{"Difícil":"Muito alta, com pico nevado.","Médio":"Elevação enorme de rocha, às vezes com neve no topo.","Fácil":"Elevação de rocha que alpinistas escalam até o pico, como o Everest, a mais alta."}},{"tema":"lugar","palavra":"ILHA","dicas":{"Difícil":"Pedaço de terra cercado d'água.","Médio":"Porção de terra cercada de água por todos os lados.","Fácil":"Porção de terra cercada por água, que só pode ser alcançada de barco ou avião."}},{"tema":"lugar","palavra":"VULCÃO","dicas":{"Difícil":"Montanha que expele lava quente.","Médio":"Montanha com cratera que entra em erupção e expele lava.","Fácil":"Abertura na crosta terrestre, geralmente em forma de montanha, que lança lava, cinzas e gases."}},{"tema":"lugar","palavra":"CAVERNA","dicas":{"Difícil":"Buraco escuro dentro da rocha.","Médio":"Abertura escura na rocha, com morcegos, estalactites e muito eco.","Fácil":"Cavidade natural escura dentro de montanhas, onde vivem morcegos e se formam estalactites e estalagmites."}},{"tema":"lugar","palavra":"CACHOEIRA","dicas":{"Difícil":"Água despenca das pedras altas.","Médio":"Queda d'água de um rio entre pedras, ótima para banho.","Fácil":"Onde a água de um rio despenca de pedras altas, formando um poço para banho."}},{"tema":"lugar","palavra":"FAZENDA","dicas":{"Difícil":"Vacas, plantações e vida rural.","Médio":"Propriedade rural com plantações, curral, vacas, porcos, galinhas e cavalos.","Fácil":"Propriedade no campo onde se plantam alimentos e se criam animais como vacas e galinhas."}},{"tema":"lugar","palavra":"FEIRA","dicas":{"Difícil":"Barracas de frutas na rua.","Médio":"Barracas montadas na rua vendendo frutas, verduras, pastel e caldo-de-cana.","Fácil":"Mercado de rua montado uma vez por semana, com vendedores gritando ofertas de frutas frescas."}},{"tema":"lugar","palavra":"SHOPPING","dicas":{"Difícil":"Lojas, praça de alimentação, cinema.","Médio":"Prédio enorme com lojas, praça de alimentação e escadas rolantes.","Fácil":"Centro comercial com dezenas de lojas, cinema, praça de alimentação e escadas rolantes entre andares."}},{"tema":"lugar","palavra":"BANCO","dicas":{"Difícil":"Guarda dinheiro, tem caixas eletrônicos.","Médio":"Instituição onde guardamos dinheiro, pagamos contas e pedimos empréstimos também.","Fácil":"Instituição financeira com agências e caixas eletrônicos, onde abrimos contas, guardamos dinheiro e pedimos empréstimos."}},{"tema":"lugar","palavra":"CORREIOS","dicas":{"Difícil":"Envia cartas, encomendas e telegramas.","Médio":"Onde enviamos cartas e encomendas para qualquer parte do país.","Fácil":"Tem agências de fachada amarela e azul, onde despachamos cartas e pacotes e compramos selos."}},{"tema":"lugar","palavra":"HOTEL","dicas":{"Difícil":"Hospedagem com quartos para viajantes.","Médio":"Onde turistas se hospedam em quartos com recepção e serviço.","Fácil":"Estabelecimento com recepção, quartos e café da manhã, onde viajantes pagam diárias para se hospedar."}},{"tema":"lugar","palavra":"ACAMPAMENTO","dicas":{"Difícil":"Barracas, fogueira e noite estrelada.","Médio":"Lugar na natureza onde montamos barracas e acendemos uma fogueira.","Fácil":"Área ao ar livre onde montamos barracas, acendemos fogueira, contamos histórias e dormimos sob estrelas."}},{"tema":"lugar","palavra":"CIRCO","dicas":{"Difícil":"Palhaços, malabaristas e lona colorida.","Médio":"Tenda de lona com palhaços, mágicos, trapezistas e muitos malabaristas.","Fácil":"Espetáculo itinerante sob grande lona colorida, com palhaços, trapezistas, mágicos e malabaristas encantando o público."}},{"tema":"lugar","palavra":"AQUÁRIO","dicas":{"Difícil":"Peixes nadando atrás do vidro.","Médio":"Tem tanques de vidro cheios de peixes e animais marinhos.","Fácil":"Espaço com tanques de vidro, onde visitantes observam peixes, tubarões, tartarugas e outros animais marinhos."}},{"tema":"lugar","palavra":"PISCINA","dicas":{"Difícil":"Água azul com cloro, mergulho.","Médio":"Grande tanque com água clorada, perfeito para nadar no verão.","Fácil":"Tanque com água azulada, em clubes ou casas, onde nadamos e pulamos do trampolim alto."}},{"tema":"lugar","palavra":"ACADEMIA","dicas":{"Difícil":"Pesos, esteiras e muito suor.","Médio":"Tem esteiras, pesos e aparelhos para malhar e ganhar músculos.","Fácil":"Espaço com esteiras, halteres e aparelhos de musculação, onde as pessoas treinam orientadas por instrutores."}},{"tema":"lugar","palavra":"PREFEITURA","dicas":{"Difícil":"Sede do governo da cidade.","Médio":"Prédio onde trabalha quem governa a cidade e seus secretários.","Fácil":"Sede do governo municipal, onde se administram ruas, escolas, postos de saúde e serviços locais."}},{"tema":"lugar","palavra":"UNIVERSIDADE","dicas":{"Difícil":"Lugar de cursos de graduação.","Médio":"Instituição de ensino superior onde estudantes fazem faculdade e pesquisas.","Fácil":"Instituição de ensino superior com vários cursos, onde se formam médicos, engenheiros, advogados e pesquisadores."}},{"tema":"lugar","palavra":"COZINHA","dicas":{"Difícil":"Fogão, geladeira, panelas e pia.","Médio":"Cômodo com fogão, geladeira e pia, onde preparamos as refeições.","Fácil":"Cômodo com fogão, geladeira, pia e armários, onde preparamos o almoço e lavamos a louça."}},{"tema":"lugar","palavra":"BANHEIRO","dicas":{"Difícil":"Chuveiro, pia, vaso e espelho.","Médio":"Cômodo com chuveiro, pia e vaso sanitário, onde nos lavamos.","Fácil":"Cômodo com chuveiro, vaso, pia e espelho, onde escovamos os dentes e cuidamos da higiene."}},{"tema":"lugar","palavra":"QUARTO","dicas":{"Difícil":"Cama, travesseiro e guarda-roupa aqui.","Médio":"Cômodo com cama e guarda-roupa, onde dormimos todas as noites.","Fácil":"Cômodo íntimo da casa, com cama, travesseiros e guarda-roupa, onde dormimos e guardamos nossas roupas."}},{"tema":"lugar","palavra":"JARDIM","dicas":{"Difícil":"Flores, plantas e regador aqui.","Médio":"Área com flores, plantas e gramado, cuidada com regador diariamente.","Fácil":"Área com canteiros de flores e gramado, cuidada com regador, adubo e tesoura de poda."}},{"tema":"lugar","palavra":"PORTO","dicas":{"Difícil":"Navios atracam para carregar cargas.","Médio":"Local costeiro onde navios atracam para carregar e descarregar mercadorias.","Fácil":"Fica no litoral, com cais, guindastes e contêineres, onde grandes navios carregam e descarregam mercadorias."}},{"tema":"lugar","palavra":"FAROL","dicas":{"Difícil":"Torre com luz guiando navios.","Médio":"Torre alta no litoral com luz giratória que orienta navegantes.","Fácil":"Torre alta à beira-mar, com luz potente que gira à noite para orientar os navios."}},{"tema":"lugar","palavra":"PLANETÁRIO","dicas":{"Difícil":"Cúpula que mostra o céu.","Médio":"Cúpula onde projetam estrelas e constelações para estudarmos o universo.","Fácil":"Prédio com cúpula onde se projetam estrelas, constelações e galáxias, como numa incrível viagem espacial."}},{"tema":"lugar","palavra":"LAVANDERIA","dicas":{"Difícil":"Máquinas limpam e secam roupas.","Médio":"Onde deixamos roupas sujas e as recebemos limpas e passadas.","Fácil":"Estabelecimento com máquinas, onde deixamos roupas sujas e buscamos depois tudo limpo, seco e passado."}},{"tema":"lugar","palavra":"LABORATÓRIO","dicas":{"Difícil":"Cientistas fazem experimentos com jalecos.","Médio":"Tem tubos de ensaio e microscópios, onde cientistas fazem experimentos.","Fácil":"Ambiente com microscópios, tubos de ensaio e jalecos, onde cientistas realizam experimentos e analisam amostras."}},{"tema":"lugar","palavra":"DELEGACIA","dicas":{"Difícil":"Onde registramos boletim de ocorrência.","Médio":"Lugar onde policiais trabalham e pessoas registram boletins de ocorrência.","Fácil":"Repartição da polícia civil onde se registram boletins de ocorrência e investigadores apuram os crimes."}},{"tema":"lugar","palavra":"LAGO","dicas":{"Difícil":"Água parada cercada de terra.","Médio":"Porção de água doce cercada de terra, ótima para pescar.","Fácil":"Porção de água doce cercada de terra, onde podemos pescar, remar ou andar de pedalinho."}},{"tema":"lugar","palavra":"SORVETERIA","dicas":{"Difícil":"Casquinhas geladas de vários sabores.","Médio":"Loja que vende casquinhas, picolés e taças de vários sabores.","Fácil":"Loja procurada no calor, que vende casquinhas, picolés e milkshakes de chocolate, morango e flocos."}}];
+
+const MAX = 6;
+const NIVEIS = ["Fácil", "Médio", "Difícil"];
+const NIVEL_DESC = { "Fácil": "Dica detalhada", "Médio": "Dica moderada", "Difícil": "Dica curta" };
+const PONTOS_BASE = { "Fácil": 10, "Médio": 20, "Difícil": 30 };
+const TECLADO = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+const TEMAS = [...new Set(PALAVRAS.map(p => p.tema))].sort();
+
+const $ = id => document.getElementById(id);
+const semAcento = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const isLetra = ch => /\p{L}/u.test(ch);
+
+/* ---------- Estado persistente (opcional; funciona sem localStorage) ---------- */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("forca_" + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("forca_" + k, JSON.stringify(v)); } catch {} }
+};
+const S = {
+  nivel: store.get("nivel", "Médio"),
+  tema: store.get("tema", "todos"),
+  placar: store.get("placar", { pontos: 0, seq: 0, melhor: 0, vit: 0, der: 0 }),
+  usadas: new Set(),
+};
+if (!NIVEIS.includes(S.nivel)) S.nivel = "Médio";
+if (S.tema !== "todos" && !TEMAS.includes(S.tema)) S.tema = "todos";
+/* ---------- Sons sintetizados com Web Audio API (sem arquivos externos) ---------- */
+const Som = {
+  ctx: null,
+  on: store.get("som", true),
+  init() {
+    if (!this.ctx) {
+      try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { return null; }
+    }
+    if (this.ctx.state === "suspended") this.ctx.resume();
+    return this.ctx;
+  },
+  tom(freq, ini, dur, { tipo = "sine", vol = 0.2, ate = null } = {}) {
+    const c = this.ctx, t = c.currentTime + ini;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = tipo;
+    o.frequency.setValueAtTime(freq, t);
+    if (ate) o.frequency.exponentialRampToValueAtTime(ate, t + dur);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g).connect(c.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  },
+  tocar(nome) {
+    if (!this.on || !this.init()) return;
+    const T = (...a) => this.tom(...a);
+    switch (nome) {
+      case "acerto":   // "plim" ascendente
+        T(660, 0, 0.12, { tipo: "triangle", vol: 0.22 });
+        T(990, 0.07, 0.18, { tipo: "triangle", vol: 0.22 });
+        break;
+      case "erro":     // zumbido grave descendente
+        T(200, 0, 0.3, { tipo: "square", vol: 0.07, ate: 95 });
+        T(140, 0, 0.3, { tipo: "sine", vol: 0.2, ate: 70 });
+        break;
+      case "vitoria":  // arpejo maior + acorde final
+        [523, 659, 784, 1047].forEach((f, i) => T(f, i * 0.11, 0.24, { tipo: "triangle", vol: 0.2 }));
+        [784, 1047, 1319].forEach(f => T(f, 0.46, 0.7, { tipo: "triangle", vol: 0.12 }));
+        break;
+      case "derrota":  // cromática descendente, nota final longa
+        [392, 370, 349, 330].forEach((f, i) =>
+          T(f, i * 0.3, i === 3 ? 0.9 : 0.3, { tipo: "sawtooth", vol: 0.06, ate: i === 3 ? 300 : null }));
+        [196, 185, 175, 165].forEach((f, i) => T(f, i * 0.3, i === 3 ? 0.9 : 0.3, { tipo: "sine", vol: 0.15 }));
+        break;
+      case "clique":
+        T(520, 0, 0.05, { vol: 0.05 });
+        break;
+    }
+  },
+  alternar() {
+    this.on = !this.on; store.set("som", this.on);
+    atualizarSom();
+    this.tocar("clique");
+  },
+};
+function atualizarSom() {
+  $("btnSom").textContent = Som.on ? "🔊" : "🔇";
+  $("btnSom").setAttribute("aria-label", Som.on ? "Desligar som" : "Ligar som");
+  $("btnSomMenu").textContent = Som.on ? "🔊 Som ligado" : "🔇 Som desligado";
+}
+
+let J = null;          // partida atual
+let tela = "menu";
+
+/* ---------- Menu ---------- */
+function renderMenu() {
+  $("levels").innerHTML = NIVEIS.map(n => `
+    <button class="level ${n === S.nivel ? "sel" : ""}" data-n="${n}">
+      <b>${n}</b><span>${NIVEL_DESC[n]}</span><small>${PONTOS_BASE[n]} pts + bônus</small>
+    </button>`).join("");
+  const opts = ["todos", ...TEMAS];
+  $("themes").innerHTML = opts.map(t => {
+    const q = t === "todos" ? PALAVRAS.length : PALAVRAS.filter(p => p.tema === t).length;
+    return `<button class="theme ${t === S.tema ? "sel" : ""}" data-t="${t}">${cap(t)}<em>(${q})</em></button>`;
+  }).join("");
+  const P = S.placar;
+  $("statsLine").textContent = (P.vit + P.der)
+    ? `Pontos: ${P.pontos} · Vitórias: ${P.vit} · Derrotas: ${P.der} · Melhor sequência: ${P.melhor}` : "";
+}
+$("levels").addEventListener("click", e => {
+  const b = e.target.closest(".level"); if (!b) return;
+  S.nivel = b.dataset.n; store.set("nivel", S.nivel); Som.tocar("clique"); renderMenu();
+});
+$("themes").addEventListener("click", e => {
+  const b = e.target.closest(".theme"); if (!b) return;
+  S.tema = b.dataset.t; store.set("tema", S.tema); Som.tocar("clique"); renderMenu();
+});
+
+function mostrar(qual) {
+  tela = qual;
+  $("menu").classList.toggle("hidden", qual !== "menu");
+  $("game").classList.toggle("hidden", qual !== "jogo");
+  $("overlay").classList.add("hidden");
+  if (qual === "menu") renderMenu();
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Partida ---------- */
+function sortear() {
+  const pool = PALAVRAS.filter(p => (S.tema === "todos" || p.tema === S.tema) && p.dicas[S.nivel]);
+  const id = p => p.tema + "|" + p.palavra;
+  let disp = pool.filter(p => !S.usadas.has(id(p)));
+  if (!disp.length) { pool.forEach(p => S.usadas.delete(id(p))); disp = pool; }
+  const p = disp[Math.floor(Math.random() * disp.length)];
+  S.usadas.add(id(p));
+  return p;
+}
+
+function novaPartida() {
+  const p = sortear();
+  J = {
+    p, chances: MAX, tentadas: new Set(), acertos: new Set(), comprou: false,
+    fim: false, venceu: false, ganho: 0,
+    letras: new Set([...p.palavra].filter(isLetra).map(semAcento)),
+  };
+  mostrar("jogo");
+  renderKbd();
+  renderJogo();
+}
+
+const temaVisivel = () => S.tema !== "todos" || J.chances < MAX || J.fim;
+const dicaVisivel = () => J.comprou || J.chances <= 1 || J.fim;
+
+function jogar(letra) {
+  if (tela !== "jogo" || !J || J.fim || J.tentadas.has(letra)) return;
+  J.tentadas.add(letra);
+  const key = document.querySelector(`.key[data-l="${letra}"]`);
+  if (J.letras.has(letra)) {
+    J.acertos.add(letra);
+    key && key.classList.add("ok");
+    if ([...J.letras].every(l => J.acertos.has(l))) return terminar(true);
+    Som.tocar("acerto");
+    renderJogo(letra);
+  } else {
+    J.chances--;
+    key && key.classList.add("bad");
+    if (J.chances === 0) return terminar(false);
+    Som.tocar("erro");
+    renderJogo(null, true);
+  }
+  if (key) key.disabled = true;
+}
+
+function comprarDica() {
+  if (J.fim || dicaVisivel() || J.chances <= 1) return;
+  J.comprou = true; J.chances--;
+  Som.tocar("erro");
+  renderJogo(null, true);
+}
+
+function terminar(venceu) {
+  J.fim = true; J.venceu = venceu;
+  const P = S.placar;
+  if (venceu) {
+    J.ganho = PONTOS_BASE[S.nivel] + 5 * J.chances;
+    P.pontos += J.ganho; P.vit++; P.seq++; P.melhor = Math.max(P.melhor, P.seq);
+  } else { P.der++; P.seq = 0; }
+  store.set("placar", P);
+  Som.tocar(venceu ? "vitoria" : "derrota");
+  renderJogo(null, !venceu);
+  document.querySelectorAll(".key").forEach(k => k.disabled = true);
+  if (venceu) confete();
+  setTimeout(mostrarResultado, 900);
+}
+
+/* ---------- Render do jogo ---------- */
+function quebrar(palavra, max = 14) {
+  if (palavra.length <= max) return [palavra];
+  const partes = palavra.split(/(?<=[-\s])/);
+  const linhas = []; let atual = "";
+  for (const p of partes) {
+    if (atual && (atual + p).trimEnd().length > max) { linhas.push(atual.trimEnd()); atual = p; }
+    else atual += p;
+  }
+  linhas.push(atual.trimEnd());
+  return linhas;
+}
+
+function renderJogo(novaLetra = null, errou = false) {
+  const P = S.placar;
+  $("sPts").textContent = P.pontos; $("sSeq").textContent = P.seq;
+  $("sWin").textContent = P.vit; $("sLose").textContent = P.der;
+
+  // Forca
+  const erros = MAX - J.chances;
+  for (let i = 0; i < MAX; i++) {
+    const el = $("p" + i);
+    el.classList.toggle("on", i < erros);
+    el.classList.remove("flash");
+  }
+  if (errou && erros > 0 && !J.fim) {
+    const ult = $("p" + (erros - 1));
+    ult.classList.add("flash");
+    setTimeout(() => ult.classList.remove("flash"), 380);
+  }
+  const perdeu = J.fim && !J.venceu;
+  $("gallows").classList.toggle("lost", perdeu);
+  desenharRosto(erros, perdeu);
+
+  $("livesTxt").textContent = `${J.chances} de ${MAX} chances`;
+  const heart = '<svg viewBox="0 0 24 22"><path d="M12 21 1.8 10.9A6 6 0 0 1 12 3.3a6 6 0 0 1 10.2 7.6Z"/></svg>';
+  $("hearts").innerHTML = Array.from({ length: MAX }, (_, i) =>
+    `<span class="${i < J.chances ? "" : "lost"}">${heart}</span>`).join("");
+
+  // Chips
+  $("chipLvl").textContent = "Nível: " + S.nivel;
+  $("chipTema").textContent = "Tema: " + (temaVisivel() ? cap(J.p.tema) : "? ? ?");
+  $("temaNote").classList.toggle("hidden", temaVisivel());
+
+  // Palavra
+  const linhas = quebrar(J.p.palavra);
+  const n = Math.max(...linhas.map(l => l.length));
+  const largura = $("word").clientWidth || 560;
+  const s = Math.max(18, Math.min(54, Math.floor(largura / n)));
+  const w = $("word");
+  w.style.setProperty("--s", s + "px");
+  w.classList.toggle("win", J.venceu);
+  w.innerHTML = linhas.map(linha => `<div class="line">${[...linha].map(ch => {
+    if (!isLetra(ch)) return `<div class="slot sep"><span>${ch === " " ? "" : ch}</span></div>`;
+    const base = semAcento(ch);
+    const rev = J.acertos.has(base);
+    const cls = rev ? "rev" : (perdeu ? "miss" : "");
+    const anim = rev && base === novaLetra ? "" : ' style="animation:none"';
+    const txt = rev || perdeu ? ch : "";
+    return `<div class="slot letter ${cls}"><span${anim}>${txt}</span></div>`;
+  }).join("")}</div>`).join("");
+  if (errou) { w.classList.remove("shake"); void w.offsetWidth; w.classList.add("shake"); }
+
+  // Dica
+  const h = $("hint");
+  if (dicaVisivel()) {
+    const dica = J.p.dicas[S.nivel] || Object.values(J.p.dicas)[0];
+    h.innerHTML = `<h3>DICA</h3><p></p>`;
+    h.querySelector("p").textContent = dica;
+  } else {
+    h.innerHTML = `<h3>DICA</h3><p class="wait">Revelada quando restar 1 chance.</p>` +
+      (J.chances > 1 ? `<button class="buy" id="btnBuy">Revelar agora (−1 chance)</button>` : "");
+    const b = $("btnBuy"); if (b) b.onclick = comprarDica;
+  }
+}
+
+function desenharRosto(erros, perdeu) {
+  const f = $("face");
+  f.classList.toggle("hidden", erros < 1);
+  if (perdeu) {
+    f.innerHTML = `<path d="M280 103 l12 12 M292 103 l-12 12 M308 103 l12 12 M320 103 l-12 12"/>
+                   <path d="M286 135 q14 -12 28 0"/>`;
+  } else if (J.venceu) {
+    f.innerHTML = `<circle class="eye-dot" cx="286" cy="109" r="4" fill="var(--body)" stroke="none"/>
+                   <circle class="eye-dot" cx="314" cy="109" r="4" fill="var(--body)" stroke="none"/>
+                   <path d="M283 124 q17 16 34 0"/>`;
+  } else {
+    f.innerHTML = `<circle class="eye-dot" cx="286" cy="109" r="4" fill="var(--body)" stroke="none"/>
+                   <circle class="eye-dot" cx="314" cy="109" r="4" fill="var(--body)" stroke="none"/>
+                   <path d="M288 130 H312"/>`;
+  }
+}
+
+function renderKbd() {
+  $("kbd").innerHTML = TECLADO.map(row =>
+    `<div class="krow">${[...row].map(l => `<button class="key" data-l="${l}">${l}</button>`).join("")}</div>`).join("");
+}
+$("kbd").addEventListener("click", e => {
+  const k = e.target.closest(".key"); if (k && !k.disabled) jogar(k.dataset.l);
+});
+
+/* ---------- Resultado ---------- */
+function mostrarResultado() {
+  if (tela !== "jogo" || !J.fim) return;
+  const m = $("modal");
+  m.classList.toggle("lose", !J.venceu);
+  $("rTitle").textContent = J.venceu ? "Você venceu!" : "Você perdeu!";
+  $("rWord").textContent = J.p.palavra;
+  $("rGain").textContent = J.venceu
+    ? `+${J.ganho} pontos · sequência de ${S.placar.seq}` : "A sequência foi zerada. Tente de novo!";
+  $("rDet").textContent = `Tema: ${cap(J.p.tema)} — ${J.p.dicas[S.nivel] || ""}`;
+  $("overlay").classList.remove("hidden");
+  $("btnAgain").focus();
+}
+
+/* ---------- Confete ---------- */
+function confete() {
+  const cv = $("confetti"), ctx = cv.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; ctx.scale(dpr, dpr);
+  const cores = ["#f59e0b", "#38bdf8", "#22c55e", "#f472b6", "#a78bfa", "#facc15"];
+  const ps = Array.from({ length: 160 }, () => ({
+    x: Math.random() * innerWidth, y: -Math.random() * 300 - 10,
+    vx: (Math.random() - .5) * 5, vy: 3 + Math.random() * 4,
+    s: 6 + Math.random() * 6, r: Math.random() * 6, vr: (Math.random() - .5) * .3,
+    c: cores[Math.floor(Math.random() * cores.length)],
+  }));
+  let n = 0;
+  (function passo() {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    for (const p of ps) {
+      p.x += p.vx; p.y += p.vy; p.vy += .12; p.r += p.vr;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+      ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s * .3, p.s, p.s * .6); ctx.restore();
+    }
+    if (++n < 170) requestAnimationFrame(passo); else ctx.clearRect(0, 0, innerWidth, innerHeight);
+  })();
+}
+
+/* ---------- Eventos ---------- */
+$("btnPlay").onclick = novaPartida;
+$("btnSom").onclick = () => Som.alternar();
+$("btnSomMenu").onclick = () => Som.alternar();
+$("btnAgain").onclick = novaPartida;
+$("btnMenu").onclick = () => mostrar("menu");
+$("btnMenu2").onclick = () => mostrar("menu");
+addEventListener("keydown", e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === "Enter") {
+    if (tela === "menu" || (tela === "jogo" && J && J.fim)) { e.preventDefault(); novaPartida(); }
+    return;
+  }
+  if (e.key === "Escape") { if (tela === "jogo") mostrar("menu"); return; }
+  const l = semAcento(e.key || "").toUpperCase();
+  if (l.length === 1 && l >= "A" && l <= "Z") jogar(l);
+});
+addEventListener("resize", () => { if (tela === "jogo" && J) renderJogo(); });
+
+atualizarSom();
+renderMenu();
+</script>
+</body>
+</html>

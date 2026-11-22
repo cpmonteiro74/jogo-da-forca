@@ -1,0 +1,787 @@
+Tema,Palavra,Dificuldade,Dica
+frutas,melancia,5,"Verde por fora, doce dentro."
+frutas,melancia,10,"Verde por fora, doce e suculenta por dentro, refresca no verão."
+frutas,melancia,15,"Verde por fora, vermelha por dentro, refrescante e doce, perfeita para dias quentes de verão."
+frutas,abacaxi,5,"Coroa espinhosa, sabor tropical doce."
+frutas,abacaxi,10,"Tropical, doce e espinhosa, sua coroa é sua marca registrada."
+frutas,abacaxi,15,Essa fruta tropical tem uma coroa espinhosa e é conhecida por seu sabor doce e ácido.
+frutas,kiwi,5,"Verde por fora, doce dentro."
+frutas,kiwi,10,"Verde por fora, doce por dentro, sementes pretas em contraste."
+frutas,kiwi,15,"Verde por fora, com sementes pretas e polpa suculenta, é uma explosão de sabor tropical."
+frutas,banana,5,"Amarela, doce, rica em potássio."
+frutas,banana,10,"Amarela por fora, doce por dentro, perfeita para um lanche."
+frutas,banana,15,"Amarela por fora, doce por dentro, frequentemente curvada, é perfeita para um lanche rápido."
+frutas,manga,5,"Tropical, suculenta, doce e amarela."
+frutas,manga,10,"É tropical, suculenta e sua cor lembra o pôr do sol."
+frutas,manga,15,"É uma fruta tropical, suculenta e doce, com casca colorida e polpa amarela vibrante."
+frutas,laranja,5,"Cor vibrante, suco cítrico refrescante."
+frutas,laranja,10,"Ela é cítrica, redonda, vibrante e rica em vitamina C."
+frutas,laranja,15,"É uma esfera vibrante, cheia de suco, que traz o sol em sua cor e sabor."
+frutas,caju,5,"Nordeste brasileiro, sabor único, castanha."
+frutas,caju,10,Possui uma castanha famosa e é símbolo do Nordeste brasileiro.
+frutas,caju,15,"Originária do Brasil, essa fruta tem uma castanha famosa e é usada em sucos e doces."
+frutas,Morango,5,"Vermelha, doce, pequena e suculenta."
+frutas,Morango,10,"Vermelha, doce e pequena, combina bem com chantilly e sobremesas."
+frutas,Morango,15,"É uma fruta vermelha, doce e suculenta, frequentemente usada em sobremesas e bebidas refrescantes."
+frutas,Pêssego,5,"Doce e suculenta, cor rosada."
+frutas,Pêssego,10,"Doce e suculenta, sua cor lembra o pôr do sol."
+frutas,Pêssego,15,"Doce e suculenta, sua cor lembra o pôr do sol e é coberta por uma pele aveludada."
+frutas,uva,5,"Pequena, doce, cresce em cachos."
+frutas,uva,10,"Pequena, suculenta, cresce em cachos e é usada para vinho."
+frutas,uva,15,"Pequena e suculenta, sua cor varia do verde ao roxo, perfeita para vinhos e sobremesas deliciosas."
+frutas,Pitanga,5,"Pequena, vermelha, sabor tropical vibrante."
+frutas,Pitanga,10,"Pequena, vermelha e suculenta, lembra o sabor tropical do Brasil."
+frutas,Pitanga,15,"Pequena e vibrante, essa fruta tropical encanta com seu sabor doce-azedo e cor vermelho-alaranjada."
+frutas,Jabuticaba,5,"Pequena, escura, cresce no tronco."
+frutas,Jabuticaba,10,"Pequena, escura, cresce no tronco e é doce brasileira."
+frutas,Jabuticaba,15,"Pequena e escura, cresce diretamente no tronco, oferecendo um sabor doce e suculento ao paladar."
+frutas,Acerola,5,"Pequena, vermelha, rica em vitamina."
+frutas,Acerola,10,"Pequena, vermelha e rica em vitamina C, cresce em arbustos."
+frutas,Acerola,15,"Pequena e vermelha, esta fruta tropical é rica em vitamina C e cresce em climas quentes."
+frutas,Mamão,5,"Doce laranja tropical, sementes pretas."
+frutas,Mamão,10,"Doce e tropical, sua polpa laranja é cheia de sementes."
+frutas,Mamão,15,"É uma fruta tropical, de casca amarela ou verde, polpa laranja e sabor doce e suave."
+frutas,Coco,5,Água doce dentro da casca.
+frutas,Coco,10,"Casca dura, interior branco e líquido refrescante para dias quentes."
+frutas,Coco,15,"É uma fruta tropical, marrom por fora e branca por dentro, famosa por sua água refrescante."
+frutas,Amora,5,"Pequena, escura, doce e suculenta."
+frutas,Amora,10,"Pequena e escura, cresce em arbustos e é suculenta."
+frutas,Amora,15,"Pequena e escura, esta fruta cresce em arbustos e é usada em geleias e sobremesas deliciosas."
+frutas,Graviola,5,"Verde, espinhosa, doce e tropical."
+frutas,Graviola,10,"Verde por fora, polpa branca e sabor exótico que surpreende paladares."
+frutas,Graviola,15,Essa fruta tropical tem casca verde espinhosa e é conhecida por seu sabor doce e ácido.
+frutas,Cereja,5,"Pequena, vermelha e saborosamente doce."
+frutas,Cereja,10,"Pequena, vermelha e doce, frequentemente usada para decorar sobremesas."
+frutas,Cereja,15,"Pequena e vermelha, esta fruta é frequentemente usada para decorar sobremesas e tem um sabor doce."
+frutas,Maracujá,5,Sabor tropical com toque azedo.
+frutas,Maracujá,10,"Amarela por fora, azeda por dentro, acalma com seu aroma exótico."
+frutas,Maracujá,15,Essa fruta tropical é conhecida por seu sabor azedo e aroma intenso que acalma os sentidos.
+frutas,Goiaba,5,"Doce, tropical, casca verde, polpa."
+frutas,Goiaba,10,"Doce e tropical, sua polpa rosa encanta em sobremesas deliciosas."
+frutas,Goiaba,15,"É uma fruta tropical, doce e suculenta, com casca verde e polpa rosada ou branca."
+frutas,Carambola,5,Cinco pontas formam sua estrela.
+frutas,Carambola,10,"Cinco pontas douradas, sabor agridoce, estrela tropical no céu."
+frutas,Carambola,15,"Possui formato de estrela quando cortada, sabor agridoce e é rica em vitamina C e antioxidantes."
+frutas,Abacate,5,"Verde por fora, cremosa por dentro."
+frutas,Abacate,10,"Verde por fora, cremoso por dentro, perfeito para guacamole e vitaminas."
+frutas,Abacate,15,"É uma fruta cremosa e verde, frequentemente usada em saladas e guacamole, rica em nutrientes."
+frutas,Tangerina,5,"Cor laranja, sabor cítrico refrescante."
+frutas,Tangerina,10,"Pequena, cítrica e doce, sua casca é fácil de remover."
+frutas,Tangerina,15,"Pequena, cítrica e doce, sua casca é fácil de remover e seu aroma é refrescante."
+frutas,Limão,5,"Amarela, azeda, refrescante e cítrica."
+frutas,Limão,10,"Amarela por fora, azeda por dentro, perfeita para uma limonada refrescante."
+frutas,Limão,15,"É uma fruta cítrica, verde por fora, amarela por dentro, e seu suco é bem azedo."
+frutas,Maçã,5,Doce tentação em cores vibrantes.
+frutas,Maçã,10,"É vermelha, doce, crocante e famosa por manter médicos longe."
+frutas,Maçã,15,"É uma fruta popular, frequentemente associada à saúde, e pode ser vermelha, verde ou amarela."
+frutas,Framboesa,5,"Pequena, vermelha, doce e suculenta."
+frutas,Framboesa,10,"Pequena e vermelha, é doce e cresce em arbustos silvestres."
+frutas,Framboesa,15,"Pequena e vermelha, esta fruta é doce e azeda, perfeita para sobremesas e geleias deliciosas."
+frutas,Pera,5,"Doce e suculenta, verde amarela."
+frutas,Pera,10,"Doce e suculenta, sua casca esconde um interior macio."
+frutas,Pera,15,"É uma fruta suculenta, de casca fina e sabor doce, frequentemente associada a formas elegantes."
+frutas,Jaca,5,"Grande, espinhosa, doce e tropical."
+frutas,Jaca,10,"É grande, espinhosa por fora e doce com gomos suculentos dentro."
+frutas,Jaca,15,"É uma fruta tropical grande, com casca espinhosa e polpa doce, popular em várias culinárias asiáticas."
+frutas,Cacau,5,Doce origem de sabor intenso.
+frutas,Cacau,10,"Doce tentação que vem de sementes, transforma-se em delícia cremosa."
+frutas,Cacau,15,"Em uma jornada tropical, um sabor amargo se transforma em doce prazer para muitos paladares."
+frutas,Cabeludinha,5,"Pequena, amarela, doce e tropical."
+frutas,Cabeludinha,10,"Pequena, amarela e doce, cresce em arbustos no Brasil."
+frutas,Cabeludinha,15,"Pequena e amarela, essa fruta brasileira tem sabor doce e cresce em arbustos tropicais exuberantes."
+plantas,Cajuína,5,Doce bebida dourada do Nordeste.
+plantas,Cajuína,10,"Fruto tropical dourado, bebida doce, tradição nordestina, celebração cultural única."
+plantas,Cajuína,15,"Fruto tropical dourado, transformado em bebida doce e clara, celebrada na cultura nordestina brasileira."
+plantas,Cana-de-açúcar,5,Doce seiva cresce em colmos.
+plantas,Cana-de-açúcar,10,"Doce se torna quando processada, movendo economias e adoçando vidas."
+plantas,Cana-de-açúcar,15,"Ela cresce alta nos campos, transformando luz solar em doçura líquida que adoça nossas vidas."
+plantas,Café,5,"Aroma quente, folhas verdes vibrantes."
+plantas,Café,10,"Folhas verdes crescem, enquanto grãos torrados despertam aromas pela manhã."
+plantas,Café,15,"A bebida escura e aromática que desperta, muitas vezes cultivada em regiões tropicais e montanhosas."
+plantas,Mangostão,5,Fruta exótica com casca roxa.
+plantas,Mangostão,10,"Fruta exótica, casca roxa, polpa branca, sabor doce e cítrico."
+plantas,Mangostão,15,"Esta fruta exótica é conhecida como a ""rainha das frutas"" e tem casca roxa espessa."
+plantas,Couve,5,Folhas verdes ricas em nutrientes.
+plantas,Couve,10,"Verde e folhosa, rica em nutrientes, usada em pratos tradicionais."
+plantas,Couve,15,"Verde e folhosa, é rica em nutrientes e frequentemente usada em sopas e saladas saudáveis."
+plantas,Orquídea,5,Beleza exótica em ambientes tropicais.
+plantas,Orquídea,10,"Elegante e exótica, floresce em ambientes tropicais com cuidado especial."
+plantas,Orquídea,15,"Delicada e exótica, esta flor encanta com suas pétalas simétricas e cores vibrantes na natureza."
+plantas,Ipê,5,Flores amarelas embelezam nossas ruas.
+plantas,Ipê,10,"Flores amarelas, rosas ou brancas embelezam ruas durante o inverno."
+plantas,Ipê,15,"Suas flores vibrantes colorem a paisagem brasileira, anunciando a chegada de uma nova estação."
+plantas,Jasmim,5,Perfume doce em noites quentes.
+plantas,Jasmim,10,"Perfume doce e delicado, flores brancas que encantam ao entardecer."
+plantas,Jasmim,15,"Delicada fragrância noturna, suas flores brancas encantam jardins e inspiram poetas com sua beleza sutil."
+plantas,Samambaia,5,Folhas verdes em cascata elegante.
+plantas,Samambaia,10,"Folhas verdes e delicadas, adoram sombra e umidade para prosperar."
+plantas,Samambaia,15,"Folhas verdes e delicadas, adoram sombra e umidade, trazendo frescor e beleza para qualquer ambiente."
+plantas,Aloe,5,Suavidade em folhas suculentas verdes.
+plantas,Aloe,10,Suas folhas suculentas guardam segredos de cura e hidratação.
+plantas,Aloe,15,"Suas folhas suculentas guardam um gel calmante, frequentemente usado para aliviar queimaduras e hidratar pele."
+plantas,Pitanga,5,Fruta vermelha com sabor tropical.
+plantas,Pitanga,10,"Fruto pequeno, vermelho e azedo, comum em quintais tropicais brasileiros."
+plantas,Pitanga,15,"Fruto pequeno e vermelho, muito apreciado em sucos e sobremesas, típico de regiões tropicais e subtropicais."
+plantas,Girassol,5,Segue o sol com alegria.
+plantas,Girassol,10,"Segue o sol com graça, sempre buscando a luz dourada."
+plantas,Girassol,15,"Ela segue o sol durante o dia, exibindo pétalas amarelas que lembram um sorriso radiante."
+plantas,Guaraná,5,Energia amazônica em sementes vibrantes.
+plantas,Guaraná,10,"Energia amazônica em forma de fruto, refrescante e borbulhante bebida."
+plantas,Guaraná,15,"Uma fruta amazônica, energética e vermelha, com sementes que lembram olhos, usada em bebidas refrescantes."
+plantas,Açaí,5,Energia roxa da floresta amazônica.
+plantas,Açaí,10,"Fruto roxo amazônico, energético, popular em tigelas e bebidas refrescantes."
+plantas,Açaí,15,"Fruto roxo da Amazônia, muito energético, consumido em tigelas e sucos, popular entre atletas e turistas."
+plantas,Manjericão,5,Folhas verdes com aroma intenso.
+plantas,Manjericão,10,"Folhas verdes aromáticas, perfeitas para pizzas e pratos italianos frescos."
+plantas,Manjericão,15,"É uma erva aromática popular na culinária italiana, frequentemente usada para fazer molho pesto fresco."
+plantas,Hortelã,5,Folhas verdes com aroma refrescante.
+plantas,Hortelã,10,"Folhas verdes aromáticas, usadas em chás e sobremesas refrescantes deliciosas."
+plantas,Hortelã,15,"Folhas verdes aromáticas, frequentemente usadas em chás e sobremesas, refrescam o paladar com seu toque único."
+plantas,Orégano,5,Erva aromática usada em pizzas.
+plantas,Orégano,10,"Usada na culinária italiana, esta erva aromática é indispensável em pizzas."
+plantas,Orégano,15,"Usada em pizzas, essa erva aromática é essencial na culinária italiana e tem folhas pequenas."
+plantas,Rosa,5,Perfume suave e pétalas vermelhas.
+plantas,Rosa,10,"Delicada e perfumada, simboliza amor e beleza em jardins floridos."
+plantas,Rosa,15,"Delicada e perfumada, sua beleza é celebrada em jardins e simboliza amor e paixão eternos."
+plantas,Azaleia,5,"Florescem em arbustos vibrantes, coloridos."
+plantas,Azaleia,10,"Florescem em arbustos, cores vibrantes, símbolo de amor e paciência."
+plantas,Azaleia,15,"Florescendo em arbustos, suas pétalas vibrantes trazem alegria ao inverno, simbolizando amor e paixão delicada."
+plantas,Bromélia,5,"Folhas em roseta, flores exóticas."
+plantas,Bromélia,10,"Adapta-se bem em ambientes tropicais, com folhas em roseta espinhosa."
+plantas,Bromélia,15,"Ela adora se agarrar em árvores, exibindo suas folhas em roseta e flores exóticas vibrantes."
+plantas,Jacarandá,5,Madeira nobre de flores roxas.
+plantas,Jacarandá,10,"Madeira nobre, flores roxas, símbolo de beleza em paisagens urbanas."
+plantas,Jacarandá,15,"Suas flores roxas colorem as ruas, enquanto sua madeira é valorizada por sua beleza e resistência."
+plantas,Camélia,5,"Flor asiática, símbolo de elegância."
+plantas,Camélia,10,"Florescem no inverno, simbolizando beleza e perfeição em jardins orientais."
+plantas,Camélia,15,"Suas flores elegantes desabrocham no inverno, trazendo beleza e cor aos jardins frios e sombrios."
+plantas,Eucalipto,5,Folhas aromáticas e crescimento rápido.
+plantas,Eucalipto,10,"Folhas aromáticas, tronco alto, origem australiana, madeira resistente, crescimento rápido."
+plantas,Eucalipto,15,Esta árvore alta e aromática é conhecida por suas folhas que alimentam coalas na Austrália.
+plantas,Araucária,5,"Folhas em espiral, pinhas imponentes."
+plantas,Araucária,10,"Folhas em espiral, símbolo do sul, pinhões caem no inverno."
+plantas,Araucária,15,"Majestosa e resistente, esta árvore é símbolo de uma região fria e produz saborosos pinhões."
+plantas,Suculentas,5,"Água pouca, folhas grossas, resistência."
+plantas,Suculentas,10,"Resistem bem à seca, armazenando água em suas folhas carnudas."
+plantas,Suculentas,15,"Elas armazenam água em suas folhas carnudas, prosperando em ambientes áridos com pouca manutenção necessária."
+plantas,Boldo,5,Folhas amargas usadas para chá.
+plantas,Boldo,10,"Folhas verdes, infusão popular, alívio digestivo, sabor amargo característico."
+plantas,Boldo,15,"É uma planta conhecida por suas folhas aromáticas, frequentemente usada para chás e digestão."
+plantas,Manacá,5,Floresce em cores vibrantes alternadas.
+plantas,Manacá,10,"Florescem em duas cores, simbolizando transformação e beleza na natureza."
+plantas,Manacá,15,"Suas flores mudam de cor com o tempo, encantando jardins com uma paleta vibrante e única."
+plantas,Violeta,5,Delicada beleza em tons vibrantes.
+plantas,Violeta,10,"Delicada e colorida, floresce em ambientes internos com pouca luz."
+plantas,Violeta,15,"Delicada e colorida, esta planta adora sombra e floresce em vasos, alegrando qualquer ambiente com beleza."
+plantas,Figueira,5,Raízes aéreas e folhas largas.
+plantas,Figueira,10,"Símbolo de sabedoria, suas raízes profundas sustentam uma vasta copa."
+plantas,Figueira,15,"Suas raízes são profundas e seus galhos oferecem sombra, simbolizando força e proteção na natureza."
+plantas,Cravo,5,Perfume intenso e pétalas vibrantes.
+plantas,Cravo,10,"Perfume intenso e pétalas vibrantes, símbolo de amor e paixão."
+plantas,Cravo,15,"É uma flor que simboliza amor e admiração, frequentemente usada em celebrações e homenagens."
+animais,Capivara,5,Gosta de nadar em rios.
+animais,Capivara,10,"Habita áreas alagadas, é roedor e adora nadar em grupo."
+animais,Capivara,15,Este animal é o maior roedor do mundo e adora nadar em rios e lagos.
+animais,Tamanduá,5,Língua longa explora formigueiros silenciosamente.
+animais,Tamanduá,10,Ele adora formigas e tem um focinho bem comprido.
+animais,Tamanduá,15,"Com um focinho longo e língua pegajosa, adora explorar formigueiros e cupinzeiros em busca de alimento."
+animais,Onça-pintada,5,Caçador furtivo da floresta tropical.
+animais,Onça-pintada,10,"Mestre das florestas, seu manto dourado exibe manchas negras."
+animais,Onça-pintada,15,"Mestre das florestas, com pelagem dourada e manchas negras, desliza silenciosamente sob a luz da lua."
+animais,Papagaio,5,Cores vibrantes e fala imitativa.
+animais,Papagaio,10,"Adora imitar sons, tem penas coloridas e vive em florestas."
+animais,Papagaio,15,Este animal colorido e falante é conhecido por imitar sons e palavras com grande habilidade.
+animais,Tartaruga,5,"Casco duro, movimento bem lento."
+animais,Tartaruga,10,"Lento viajante com casa nas costas, vive em águas calmas."
+animais,Tartaruga,15,"Este animal é conhecido por sua casca dura e movimento lento, vivendo tanto na água quanto em terra."
+animais,Tigre,5,Listras laranjas e olhar feroz.
+animais,Tigre,10,Listras majestosas percorrem a selva com passos silenciosos e poderosos.
+animais,Tigre,15,"Majestoso e listrado, este felino é um caçador solitário que reina nas florestas densas."
+animais,Elefante,5,"Grande, cinza, tromba, orelhas, savana."
+animais,Elefante,10,"Gigante gentil da savana, com tromba e grandes orelhas."
+animais,Elefante,15,"Com orelhas grandes e tromba longa, este gigante cinza é conhecido por sua memória incrível."
+animais,Cachorro,5,Companheiro leal de quatro patas.
+animais,Cachorro,10,"Adora correr, é leal, e sempre abana o rabo feliz."
+animais,Cachorro,15,"É um companheiro leal, adora brincar ao ar livre e é conhecido por sua fidelidade inabalável."
+animais,Gato,5,Adora ronronar e caçar ratos.
+animais,Gato,10,"Adora explorar, ronrona suavemente e aprecia longos cochilos ao sol."
+animais,Gato,15,"Este animal adora explorar, tem bigodes elegantes e é conhecido por sua curiosidade inata."
+animais,Girafa,5,Pescoço longo alcança folhas altas.
+animais,Girafa,10,"Alto habitante das savanas, com pescoço que toca o céu."
+animais,Girafa,15,"Com pescoço longo e manchas únicas, este animal majestoso alcança as folhas mais altas das árvores."
+animais,Arara,5,Penas coloridas em árvores tropicais.
+animais,Arara,10,"Vive em florestas tropicais, é colorida e adora voar alto."
+animais,Arara,15,"Colorido e falante, este pássaro tropical é conhecido por suas penas vibrantes e habilidades de imitação."
+animais,Pinguim,5,Gosta de gelo e desliza.
+animais,Pinguim,10,"Vive em regiões geladas, veste um elegante traje preto e branco."
+animais,Pinguim,15,Este animal elegante veste um terno preto e branco e adora deslizar no gelo gelado.
+animais,Capivara,5,Rato gigante que adora água.
+animais,Capivara,10,"Habita áreas alagadas, é roedor e adora nadar em grupo."
+animais,Capivara,15,"Este animal é conhecido por sua calma, vive em grupos e adora nadar em rios."
+animais,Capivara,5,Adora água e é gigante.
+animais,Capivara,10,"Habita áreas alagadas, é roedor e adora nadar em grupo."
+animais,Capivara,15,"Este animal é conhecido por sua calma, vive em grupos e adora nadar em rios tranquilos."
+animais,Anta,5,Grande mamífero herbívoro da floresta.
+animais,Anta,10,"Habita florestas tropicais, é herbívoro e possui um focinho flexível."
+animais,Anta,15,Este animal é conhecido por sua aparência robusta e habita florestas tropicais da América do Sul.
+animais,Baleia,5,"Gigante do oceano, canta profundo."
+animais,Baleia,10,"Gigante dos mares, canta e dança nas profundezas azuis vastas."
+animais,Baleia,15,Este gigante dos oceanos canta melodias subaquáticas e é conhecido por suas impressionantes acrobacias aquáticas.
+animais,Leão,5,"Rei da savana, juba majestosa."
+animais,Leão,10,"Rei da savana, sua juba majestosa impõe respeito absoluto."
+animais,Leão,15,"Rei da savana, sua juba majestosa e rugido poderoso ecoam pela vastidão dourada do habitat."
+animais,Golfinho,5,Salta alegremente nas ondas azuis.
+animais,Golfinho,10,"Nadador ágil, inteligente, adora saltar e vive em grupos sociais."
+animais,Golfinho,15,"Este animal marinho é conhecido por sua inteligência, saltos acrobáticos e comunicação através de sons subaquáticos."
+animais,Zebra,5,Listras pretas em fundo branco.
+animais,Zebra,10,"Listras pretas e brancas, savanas africanas, parentes dos cavalos."
+animais,Zebra,15,Este animal é conhecido por suas listras únicas e vive em savanas africanas em grupos sociais.
+animais,Suricata,5,"Vigilante do deserto, sempre alerta."
+animais,Suricata,10,"Vive em grupos, é vigilante e adora ficar em pé."
+animais,Suricata,15,"Este animal vive em grupos, é conhecido por sua postura ereta e habita regiões desérticas africanas."
+animais,Panda,5,Bambu é seu prato favorito.
+animais,Panda,10,Adora bambu e tem uma pelagem preta e branca marcante.
+animais,Panda,15,"Este animal adora bambu, é preto e branco, e vive em florestas asiáticas montanhosas."
+animais,Pavão,5,Cores vibrantes em exibição majestosa.
+animais,Pavão,10,"Suas penas vibrantes dançam ao sol, exibindo beleza e majestade."
+animais,Pavão,15,"Com penas exuberantes e uma dança hipnotizante, encanta com seu leque colorido em exibições majestosas."
+animais,Preguiça,5,Movimento lento nas copas verdes.
+animais,Preguiça,10,"Movimento lento, vida nas árvores, sorriso tranquilo e olhar sereno."
+animais,Preguiça,15,Este animal é conhecido por seu ritmo tranquilo e passa a maior parte do tempo descansando.
+animais,Tucano,5,Bico colorido em florestas tropicais.
+animais,Tucano,10,"Colorido e tropical, seu bico é destaque na floresta verde."
+animais,Tucano,15,"Com bico colorido e vibrante, habita florestas tropicais, destacando-se entre as copas das árvores."
+animais,Lobo,5,Uiva sob a luz prateada.
+animais,Lobo,10,Uiva para a lua e vive em matilhas na floresta.
+animais,Lobo,15,"Habita florestas e montanhas, uiva para a lua e vive em grupos chamados alcateias."
+animais,Jacaré,5,Mora em rios e pântanos.
+animais,Jacaré,10,"Habita águas doces, possui dentes afiados e pele escamosa."
+animais,Jacaré,15,Este réptil aquático possui uma mandíbula poderosa e é conhecido por sua pele escamosa e resistente.
+animais,Ornitorrinco,5,"Bico de pato, cauda castor."
+animais,Ornitorrinco,10,"Tem bico de pato, põe ovos e vive na água."
+animais,Ornitorrinco,15,"Este animal único combina características de aves, répteis e mamíferos, desafiando classificações tradicionais da natureza."
+animais,Araraquara,5,Plumagem vibrante sobrevoa cidade encantadora.
+animais,Araraquara,10,"Colorido e falante, encontra-se em uma cidade do interior paulista."
+animais,Araraquara,15,"Colorido e falante, este habitante das florestas tropicais também compartilha seu nome com uma cidade paulista."
+animais,Tatu,5,"Casco duro, escava na terra."
+animais,Tatu,10,"Possui casco resistente, escava tocas e é mestre em se esconder."
+animais,Tatu,15,"Com armadura natural, este pequeno escavador noturno é mestre em criar túneis sob a terra."
+animais,Bicho-preguiça,5,Movimento lento nas copas verdes.
+animais,Bicho-preguiça,10,"Movimenta-se lentamente entre as árvores, apreciando cada momento de calma."
+animais,Bicho-preguiça,15,Este animal é conhecido por sua lentidão e passa a maior parte do tempo em árvores.
+aves,Papagaio,5,Imita sons com cores vibrantes.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, este pássaro é conhecido por imitar sons e viver em florestas tropicais."
+aves,Arara,5,Cores vibrantes em florestas tropicais brasileiras.
+aves,Arara,10,"Colorido e falante, habita florestas tropicais com plumagem vibrante e exótica."
+aves,Arara,15,"Colorida e barulhenta, essa ave tropical é conhecida por sua habilidade em imitar sons e palavras."
+aves,Papagaio-do-mar,5,"Colorido, bico laranja, habitat costeiro."
+aves,Papagaio-do-mar,10,"Colorido e ágil, habita penhascos e é mestre na pesca."
+aves,Papagaio-do-mar,15,"Com bico colorido e habitat costeiro, esta ave encanta com suas habilidades de mergulho e voo."
+aves,Papagaio,5,Imita sons com cores vibrantes.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, imita sons e vozes, alegrando ambientes com sua presença vibrante e inteligente."
+aves,Papagaio,5,Gosta de imitar sons humanos.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, imita sons e vozes, alegrando ambientes com sua presença vibrante e cativante."
+aves,Papagaio-charão,5,"Verde, fala, vive no sul."
+aves,Papagaio-charão,10,"Verde vibrante, habitat sulista, adora pinhões e é bem falante."
+aves,Papagaio-charão,15,Essa ave adora pinhões e é conhecida por sua plumagem verde vibrante e bico forte.
+aves,Papagaio-verdadeiro,5,"Verde, fala, penas, Brasil, inteligente."
+aves,Papagaio-verdadeiro,10,"Colorido e falante, adora repetir sons e vive em florestas."
+aves,Papagaio-verdadeiro,15,"Colorido e falante, este pássaro é conhecido por sua habilidade de imitar sons e palavras humanas."
+aves,Avestruz,5,"Corre rápido, mas não voa."
+aves,Avestruz,10,"Grande e veloz, enterra a cabeça quando se sente ameaçada."
+aves,Avestruz,15,"É a maior ave do mundo, conhecida por sua velocidade e incapacidade de voar."
+aves,Papagaio-de-cara-roxa,5,"Ilha, cores vibrantes, canto alegre."
+aves,Papagaio-de-cara-roxa,10,"Habita ilhas brasileiras, destacando-se por sua vibrante plumagem facial colorida."
+aves,Papagaio-de-cara-roxa,15,"Habita ilhas do Atlântico Sul, possui plumagem vibrante e é conhecido por sua habilidade vocal impressionante."
+aves,Canário,5,Canta alegremente em sua gaiola.
+aves,Canário,10,"Pequeno cantor amarelo, famoso por sua melodia alegre e vibrante."
+aves,Canário,15,"Uma pequena criatura amarela, conhecida por seu canto melodioso, frequentemente encontrada em gaiolas domésticas."
+aves,Pardal,5,Pequeno cantor de penas marrons.
+aves,Pardal,10,"Pequeno cantor urbano, frequentemente visto em praças e jardins movimentados."
+aves,Pardal,15,"Pequeno cantor urbano, frequentemente visto em bandos, adaptando-se facilmente a ambientes humanos e cidades movimentadas."
+aves,Aves,5,"Canta ao amanhecer, voa alto."
+aves,Aves,10,"Coloridas e cantantes, dominam os céus com graça e liberdade."
+aves,Aves,15,"Elas dominam os céus com suas asas, cantando melodias que encantam a natureza ao redor."
+aves,Beija-flor,5,"Pequena, colorida, rápida e nectarífera."
+aves,Beija-flor,10,"Pequena criatura alada, rápida e colorida, adora flores e néctar."
+aves,Beija-flor,15,"Pequena criatura alada, conhecida por seu voo ágil e habilidade de pairar enquanto se alimenta."
+aves,Calopsita,5,Cores vibrantes e canto encantador.
+aves,Calopsita,10,"Cores vibrantes e canto melodioso, companheiro de penas encantadoramente dócil."
+aves,Calopsita,15,"Com penas vibrantes e crista distinta, encanta com seu canto melodioso e personalidade amigável."
+aves,Papagaio,5,Gosta de imitar sons humanos.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, este pássaro é conhecido por imitar sons e viver em florestas tropicais."
+aves,Flamingo,5,"Cor-de-rosa, pernas longas, elegância tropical."
+aves,Flamingo,10,"Pernas longas e cor vibrante, dança elegante sob o sol tropical."
+aves,Flamingo,15,"Com penas rosadas e pernas longas, esta ave adora águas rasas e se alimenta de crustáceos."
+aves,Colibri,5,"Pequeno e ágil, cores vibrantes."
+aves,Colibri,10,"Pequena criatura alada, conhecida por seu voo rápido e vibrante."
+aves,Colibri,15,"Pequena criatura alada, conhecida por sua habilidade de pairar e sugar néctar com precisão incrível."
+aves,Papagaio,5,Imita sons e adora conversar.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, imita sons e palavras, vivendo em florestas tropicais com inteligência surpreendente e social."
+aves,Papagaio-do-mar,5,"Colorido, bico grande, habitat costeiro."
+aves,Papagaio-do-mar,10,"Colorido e ágil, habita penhascos e adora pescar no mar."
+aves,Papagaio-do-mar,15,"Com bico colorido e habitat costeiro, esta ave encanta com suas habilidades de mergulho e voo."
+aves,Coruja,5,"Olhos grandes, sábia e noturna."
+aves,Coruja,10,"Olhos grandes e noturnos, sábia guardiã dos segredos da noite."
+aves,Coruja,15,"Mestre da noite, com olhos grandes e sabedoria antiga, voa silenciosamente entre as sombras misteriosas."
+aves,Pica-pau,5,Bate em troncos com frequência.
+aves,Pica-pau,10,"Bate com o bico em troncos, procurando insetos para comer."
+aves,Pica-pau,15,Essa ave é conhecida por seu som característico ao bater em troncos com seu bico forte.
+aves,Araraquã,5,Plumagem vibrante em florestas tropicais.
+aves,Araraquã,10,"Colorido e barulhento, habita florestas tropicais com plumagem vibrante e exótica."
+aves,Araraquã,15,"Colorida e exuberante, essa ave amazônica é conhecida por seu canto alto e presença marcante."
+aves,Periquito,5,"Colorido, pequeno, adora sementes tropicais."
+aves,Periquito,10,"Colorido e falante, adora socializar e vive em bando alegremente."
+aves,Periquito,15,"Colorido e alegre, este pequeno pássaro é conhecido por sua habilidade em imitar sons variados."
+aves,Papagaio-do-mangue,5,"Verde vibrante, habitat costeiro, falante."
+aves,Papagaio-do-mangue,10,"Habita áreas costeiras, é colorido e imita sons com habilidade incrível."
+aves,Papagaio-do-mangue,15,"Habita áreas costeiras, possui plumagem verde vibrante e é conhecido por sua habilidade de imitar sons."
+aves,Garça,5,"Pernas longas, pescoço elegante, voo."
+aves,Garça,10,"Elegante caçadora de águas rasas, desliza silenciosamente em busca de peixes."
+aves,Garça,15,"Com pernas longas e elegância serena, ela pesca em águas rasas, exibindo plumagem branca e graciosa."
+aves,Papagaio,5,Imita sons com cores vibrantes.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, este pássaro é conhecido por imitar sons e adora viver em bandos."
+aves,Papagaio,5,Cores vibrantes e fala imitativa.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, este pássaro tropical é conhecido por imitar sons e adora companhia humana."
+aves,Papagaio,5,Imita sons com muita habilidade.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, este pássaro tropical é conhecido por imitar sons e adora companhia humana."
+aves,Papagaio,5,Imita sons e adora conversar.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora estar em companhia."
+aves,Papagaio,15,"Colorido e falante, este pássaro tropical é conhecido por imitar sons e palavras com habilidade impressionante."
+aves,Papagaio,5,Adora imitar sons e cores.
+aves,Papagaio,10,"Colorido e falante, imita sons e adora viver em bando."
+aves,Papagaio,15,"Colorido e falante, este pássaro é conhecido por imitar sons e adora viver em bando."
+frutas,Ameixa,5,"Roxa, doce, vira fruta seca."
+frutas,Ameixa,10,"Pequena e roxa, pode ser comida fresca ou também seca."
+frutas,Ameixa,15,"Tem casca roxa e polpa amarelada, muito usada seca em pudins e na ceia natalina."
+frutas,Figo,5,"Doce, roxo, cheio de sementinhas."
+frutas,Figo,10,"Roxo por fora, vermelho por dentro, delicioso em doces caseiros."
+frutas,Figo,15,"Fruta de casca roxa e interior vermelho cheio de sementes, famosa em compotas e doces."
+frutas,Romã,5,Cheia de sementes vermelhas brilhantes.
+frutas,Romã,10,Sua casca dura e avermelhada esconde centenas de sementes suculentas.
+frutas,Romã,15,"No Ano-Novo, muitos guardam suas sementes vermelhas na carteira para atrair prosperidade o ano todo."
+frutas,Lichia,5,"Casca rugosa, polpa branca perfumada."
+frutas,Lichia,10,Pequena fruta asiática de casca vermelha rugosa e polpa branca.
+frutas,Lichia,15,"Originária da China, tem casca vermelha e áspera, polpa branca translúcida e um caroço marrom."
+frutas,Pitaia,5,Casca rosa com escamas verdes.
+frutas,Pitaia,10,"Casca rosa com escamas, polpa branca ou roxa com sementinhas."
+frutas,Pitaia,15,"Chamada de fruta-do-dragão, vem de um cacto e tem polpa cheia de sementinhas pretas crocantes."
+frutas,Cupuaçu,5,"Amazônica, parente do cacau, azedinha."
+frutas,Cupuaçu,10,"Fruta amazônica de casca marrom, polpa branca e aroma marcante."
+frutas,Cupuaçu,15,"Prima do cacau, esta fruta da Amazônia vira sucos, cremes e um chocolate chamado cupulate."
+frutas,Caqui,5,"Laranja, macia, parece um tomate."
+frutas,Caqui,10,"Parece um tomate laranja, é muito doce e bem macio."
+frutas,Caqui,15,"De origem asiática, lembra um tomate alaranjado e fica muito doce e mole quando maduro."
+frutas,Melão,5,"Casca amarela, polpa clara refrescante."
+frutas,Melão,10,"De casca amarela ou verde, com polpa doce e clara."
+frutas,Melão,15,"Parente da melancia, tem casca amarela ou rendada e polpa clara, doce e bem suculenta."
+frutas,Mirtilo,5,"Pequena, azul, cheia de antioxidantes."
+frutas,Mirtilo,10,"Pequena bolinha azul-escura, muito usada em muffins, iogurtes e vitaminas."
+frutas,Mirtilo,15,"Chamada de blueberry, esta pequena fruta azul é rica em antioxidantes e usada em muffins."
+frutas,Tamarindo,5,"Vagem marrom, polpa azeda grudenta."
+frutas,Tamarindo,10,"Vagem marrom com polpa agridoce, usada em sucos e balas."
+frutas,Tamarindo,15,"Cresce em vagens de casca quebradiça e sua polpa agridoce vira sucos, molhos e doces."
+frutas,Seriguela,5,"Pequena, vermelha, nordestina e azedinha."
+frutas,Seriguela,10,"Pequena fruta nordestina, vermelha quando madura, com caroço bem grande."
+frutas,Seriguela,15,"Típica do Nordeste, esta frutinha fica vermelha ao amadurecer e tem sabor agridoce bem marcante."
+frutas,Cajá,5,"Amarela, pequena, azeda e perfumada."
+frutas,Cajá,10,"Pequena e amarela, muito azeda, faz um suco nordestino delicioso."
+frutas,Cajá,15,"Fruta amarela de sabor bem ácido, muito apreciada em sucos, sorvetes e picolés no Nordeste."
+frutas,Umbu,5,"Fruta do sertão, azedinha, verde."
+frutas,Umbu,10,"Pequena, verde e azedinha, nasce numa árvore resistente do sertão."
+frutas,Umbu,15,Vem de árvore da caatinga que guarda água nas raízes e alimenta sertanejos na seca.
+frutas,Buriti,5,"Casca escamosa, polpa laranja, palmeira."
+frutas,Buriti,10,"Fruto de palmeira, casca com escamas marrons e polpa alaranjada."
+frutas,Buriti,15,"Fruto de palmeira das veredas, tem casca escamosa e polpa laranja rica em vitamina A."
+frutas,Bacuri,5,"Amazônica, casca grossa, polpa branca."
+frutas,Bacuri,10,"Fruta amazônica de casca amarela e grossa, com polpa branca."
+frutas,Bacuri,15,"Apreciada no Pará e Maranhão, tem casca grossa amarela e polpa branca usada em sorvetes."
+frutas,Pequi,5,Cuidado: tem espinhos no caroço.
+frutas,Pequi,10,"Fruto amarelo do cerrado, cheiro forte e espinhos no caroço."
+frutas,Pequi,15,"Símbolo do cerrado goiano, tem polpa amarela de cheiro forte e caroço cheio de espinhos."
+frutas,Jenipapo,5,Seu suco vira tinta escura.
+frutas,Jenipapo,10,Indígenas usam seu suco para pintar a pele de preto.
+frutas,Jenipapo,15,"Fruto cujo suco escurece a pele, usado em pinturas indígenas e licores de festas juninas."
+frutas,Nectarina,5,"Parece pêssego, mas sem penugem."
+frutas,Nectarina,10,"Prima do pêssego, tem casca lisa, avermelhada e polpa suculenta."
+frutas,Nectarina,15,"Muito parecida com o pêssego, mas de casca lisa e brilhante, sem aquela penugem aveludada."
+frutas,Damasco,5,"Laranja, aveludada, famosa quando seca."
+frutas,Damasco,10,"Pequena e alaranjada, é muito consumida seca em ceias festivas."
+frutas,Damasco,15,"Fruta alaranjada de casca aveludada, muito vendida seca e usada em pratos árabes e natalinos."
+frutas,Toranja,5,"Cítrica grande, levemente amarga, rosada."
+frutas,Toranja,10,"Cítrica grande, de polpa rosada e sabor ácido levemente amargo."
+frutas,Toranja,15,"Chamada de grapefruit, é uma cítrica grande de polpa rosada, sabor ácido e fundo amargo."
+plantas,Alecrim,5,Erva aromática que tempera assados.
+plantas,Alecrim,10,"Folhas finas e perfumadas, tempera carnes, batatas e é chá."
+plantas,Alecrim,15,"Arbusto de folhas finas como agulhas, muito aromático, usado para temperar assados e preparar chás."
+plantas,Lavanda,5,Flores roxas de perfume calmante.
+plantas,Lavanda,10,Seus campos roxos perfumam a Provença e acalmam o sono.
+plantas,Lavanda,15,"Flores roxas e perfume suave, famosa nos campos franceses e usada em sabonetes e óleos."
+plantas,Cacto,5,Espinhos e pouca água necessária.
+plantas,Cacto,10,"Vive no deserto, tem espinhos e guarda água no caule."
+plantas,Cacto,15,"Típico de regiões secas, troca folhas por espinhos e armazena água no caule para sobreviver."
+plantas,Bambu,5,"Caule oco, cresce muito rápido."
+plantas,Bambu,10,"Caule oco e resistente, é o alimento preferido dos pandas."
+plantas,Bambu,15,"Tem caule oco e segmentado, cresce rapidíssimo e serve para construções, móveis e alimentar pandas."
+plantas,Mandacaru,5,Cacto símbolo do sertão nordestino.
+plantas,Mandacaru,10,"Cacto alto do sertão, quando floresce anuncia que vem chuva."
+plantas,Mandacaru,15,"Cacto da caatinga, cantado por Luiz Gonzaga, cuja flor branca indica chuva chegando ao sertão."
+plantas,Vitória-régia,5,Folha gigante flutua na Amazônia.
+plantas,Vitória-régia,10,Folha redonda e enorme que flutua nos rios da Amazônia.
+plantas,Vitória-régia,15,"Planta aquática amazônica com folhas circulares gigantes que flutuam, ligada a uma linda lenda indígena."
+plantas,Lírio,5,"Flor elegante, símbolo de pureza."
+plantas,Lírio,10,"Flor grande e perfumada, frequentemente branca, simboliza pureza e paz."
+plantas,Lírio,15,"Flor de pétalas grandes em forma de trombeta, perfumada e associada à pureza em casamentos."
+plantas,Tulipa,5,Flor famosa dos campos holandeses.
+plantas,Tulipa,10,"Flor em forma de taça, símbolo dos campos coloridos holandeses."
+plantas,Tulipa,15,"Nasce de bulbo, tem flores em taça e valeu fortunas na Holanda do século dezessete."
+plantas,Margarida,5,"Pétalas brancas, miolo amarelo, simples."
+plantas,Margarida,10,"Tem pétalas brancas e miolo amarelo, usada no jogo bem-me-quer."
+plantas,Margarida,15,"Flor de pétalas brancas e centro amarelo, usada para arrancar pétalas no jogo do bem-me-quer."
+plantas,Hibisco,5,"Flor grande, vira chá vermelho."
+plantas,Hibisco,10,"Flor tropical grande e vistosa, seu chá avermelhado é famoso."
+plantas,Hibisco,15,"Flor tropical de pétalas largas e vistosas, usada em colares havaianos e em chás avermelhados."
+plantas,Antúrio,5,Flor vermelha brilhante em coração.
+plantas,Antúrio,10,"Flor vermelha em forma de coração, parece feita de plástico."
+plantas,Antúrio,15,Planta de interior com folhas verdes e uma estrutura vermelha brilhante em forma de coração.
+plantas,Costela-de-adão,5,Folhas grandes com furos recortados.
+plantas,Costela-de-adão,10,"Planta de folhas enormes e recortadas, queridinha da decoração moderna."
+plantas,Costela-de-adão,15,"Trepadeira tropical de folhas grandes cheias de furos e recortes, que lembram ossos do peito."
+plantas,Espada-de-são-jorge,5,"Folhas longas, pontudas, contra mau-olhado."
+plantas,Espada-de-são-jorge,10,"Folhas rígidas e pontudas, muitos acreditam que protege contra mau-olhado."
+plantas,Espada-de-são-jorge,15,"Planta de folhas longas e rígidas como lâminas, colocada na porta para afastar energias negativas."
+plantas,Pau-brasil,5,Árvore que batizou nosso país.
+plantas,Pau-brasil,10,Árvore de madeira avermelhada que deu nome ao nosso país.
+plantas,Pau-brasil,15,"Árvore da Mata Atlântica, explorada pelos portugueses pelo corante vermelho e que batizou o país."
+plantas,Carvalho,5,Árvore robusta que produz bolotas.
+plantas,Carvalho,10,"Árvore grande e robusta, de madeira nobre, que produz bolotas."
+plantas,Carvalho,15,"Árvore de vida longa e madeira resistente, usada em barris de vinho, que produz bolotas."
+plantas,Mandioca,5,Raiz que vira farinha brasileira.
+plantas,Mandioca,10,"Raiz chamada de aipim ou macaxeira, vira farinha e tapioca."
+plantas,Mandioca,15,"Raiz de casca marrom e interior branco, base da culinária indígena, vira farinha e tapioca."
+plantas,Salsinha,5,Tempero verde parceiro da cebolinha.
+plantas,Salsinha,10,"Erva verde de folhas recortadas, forma o cheiro-verde com cebolinha."
+plantas,Salsinha,15,"Erva de folhas verdes e recortadas, salpicada sobre pratos e parceira da cebolinha no cheiro-verde."
+plantas,Erva-mate,5,Folhas do chimarrão e tereré.
+plantas,Erva-mate,10,Suas folhas preparam o chimarrão gaúcho e o tereré gelado.
+plantas,Erva-mate,15,"Nativa do sul, suas folhas secas preparam o chimarrão quente e também o tereré gelado."
+plantas,Buganvília,5,Trepadeira de flores coloridas vibrantes.
+plantas,Buganvília,10,"Trepadeira espinhosa cobre muros com cores roxas, rosas e vermelhas."
+plantas,Buganvília,15,"Também chamada de primavera, esta trepadeira espinhosa cobre muros e pérgolas com brácteas coloridas vibrantes."
+plantas,Copo-de-leite,5,Flor branca elegante em cálice.
+plantas,Copo-de-leite,10,"Flor branca em formato de cálice, muito usada em buquês."
+plantas,Copo-de-leite,15,"Flor branca que se enrola como um cálice, comum em buquês de noiva, porém tóxica."
+animais,Cavalo,5,"Galopa, relincha e tem crina."
+animais,Cavalo,10,"Animal de crina e cascos, relincha e galopa pelos campos."
+animais,Cavalo,15,"Animal forte e veloz, com crina e cascos, foi o meio de transporte por séculos."
+animais,Vaca,5,Faz muu e dá leite.
+animais,Vaca,10,Animal da fazenda que faz muu e produz leite diariamente.
+animais,Vaca,15,"Ruminante da fazenda, muitas vezes malhada, que muge e fornece o leite do nosso café."
+animais,Coelho,5,"Orelhas longas, adora comer cenoura."
+animais,Coelho,10,"Tem orelhas compridas, pula bastante e é símbolo da Páscoa."
+animais,Coelho,15,"Mamífero de orelhas compridas e rabo de algodão, salta, adora cenoura e simboliza a Páscoa."
+animais,Macaco,5,Adora banana e pular galhos.
+animais,Macaco,10,Primata ágil que pula entre galhos e adora comer banana.
+animais,Macaco,15,"Primata brincalhão e inteligente, usa as mãos e a cauda para se pendurar nos galhos."
+animais,Urso,5,"Grande, peludo, hiberna no inverno."
+animais,Urso,10,"Mamífero grande e peludo, adora mel e hiberna no inverno."
+animais,Urso,15,"Mamífero grande, de pelagem espessa, que pesca salmões, adora mel e passa o inverno hibernando."
+animais,Canguru,5,Salta alto e carrega bolsa.
+animais,Canguru,10,Marsupial australiano que salta e carrega o filhote na bolsa.
+animais,Canguru,15,"Símbolo da Austrália, este marsupial dá saltos enormes e leva o filhote dentro da bolsa."
+animais,Coala,5,Dorme muito e come eucalipto.
+animais,Coala,10,"Marsupial fofinho da Austrália, come eucalipto e dorme quase sempre."
+animais,Coala,15,"Marsupial de pelagem cinza e orelhas peludas, vive abraçado às árvores comendo folhas de eucalipto."
+animais,Camelo,5,Corcovas e resistência no deserto.
+animais,Camelo,10,"Animal do deserto com duas corcovas, aguenta dias sem água."
+animais,Camelo,15,"Conhecido como navio do deserto, tem duas corcovas de gordura e resiste dias sem água."
+animais,Rinoceronte,5,Pele grossa e chifre nasal.
+animais,Rinoceronte,10,"Mamífero enorme de pele grossa, com chifres sobre o focinho."
+animais,Rinoceronte,15,"Herbívoro africano e asiático de pele espessa, ameaçado pela caça ilegal por causa do chifre."
+animais,Hipopótamo,5,Gigante que vive nos rios.
+animais,Hipopótamo,10,Mamífero enorme africano que passa o dia dentro dos rios.
+animais,Hipopótamo,15,"Mamífero africano de boca gigante, passa o dia submerso em rios e é surpreendentemente perigoso."
+animais,Raposa,5,"Astuta, cauda peluda, focinho fino."
+animais,Raposa,10,"Animal astuto de pelagem alaranjada, cauda peluda e focinho pontudo."
+animais,Raposa,15,"Famosa nas fábulas pela esperteza, tem pelagem avermelhada, orelhas pontudas e cauda longa e peluda."
+animais,Esquilo,5,"Guarda nozes, cauda bem peluda."
+animais,Esquilo,10,Roedor de cauda peluda que guarda nozes para o inverno.
+animais,Esquilo,15,"Pequeno roedor ágil de cauda volumosa, sobe em árvores e enterra nozes para comer depois."
+animais,Morcego,5,Mamífero voador que dorme pendurado.
+animais,Morcego,10,Mamífero voador que dorme de cabeça para baixo em cavernas.
+animais,Morcego,15,"O único mamífero capaz de voar, é noturno, usa ecolocalização e descansa pendurado de ponta-cabeça."
+animais,Polvo,5,Oito braços e solta tinta.
+animais,Polvo,10,Animal marinho de oito braços com ventosas que solta tinta.
+animais,Polvo,15,"Molusco marinho inteligente, tem oito tentáculos com ventosas, três corações e solta tinta para fugir."
+animais,Tubarão,5,"Predador do mar, barbatana dorsal."
+animais,Tubarão,10,Predador dos oceanos com fileiras de dentes e barbatana dorsal.
+animais,Tubarão,15,"Peixe predador de esqueleto cartilaginoso, com fileiras de dentes e barbatana que corta a superfície."
+animais,Cobra,5,Rasteja sem patas e sibila.
+animais,Cobra,10,"Réptil sem patas que rasteja, troca de pele e sibila."
+animais,Cobra,15,"Réptil de corpo alongado sem patas, troca de pele, sibila e algumas espécies são venenosas."
+animais,Sapo,5,Coaxa e pula na lagoa.
+animais,Sapo,10,"Anfíbio que coaxa, pula e come insetos com língua grudenta."
+animais,Sapo,15,"Anfíbio de pele rugosa, nasce girino, coaxa à noite e caça insetos com a língua."
+animais,Abelha,5,Produz mel e pode picar.
+animais,Abelha,10,"Inseto que produz mel, poliniza flores e vive na colmeia."
+animais,Abelha,15,"Inseto amarelo e preto, vive em colmeias, produz mel e é essencial para polinizar plantas."
+animais,Borboleta,5,"Asas coloridas, antes foi lagarta."
+animais,Borboleta,10,Inseto de asas coloridas que antes foi lagarta e casulo.
+animais,Borboleta,15,"Inseto de asas coloridas que passa por metamorfose, de lagarta a casulo, até poder voar."
+animais,Peixe-boi,5,"Mamífero aquático, lento e herbívoro."
+animais,Peixe-boi,10,"Mamífero aquático e calmo, come plantas em rios e mares."
+animais,Peixe-boi,15,"Mamífero aquático dócil, ameaçado de extinção, vive na Amazônia e no litoral comendo plantas aquáticas."
+animais,Mico-leão-dourado,5,Pequeno primata de pelagem dourada.
+animais,Mico-leão-dourado,10,"Macaco de pelagem dourada e juba, vive na Mata Atlântica."
+animais,Mico-leão-dourado,15,"Primata da Mata Atlântica com pelagem alaranjada e juba, símbolo da luta contra a extinção."
+animais,Lobo-guará,5,"Pernas longas, pelagem laranja, cerrado."
+animais,Lobo-guará,10,"Canídeo de pernas longas, estampado na nota de duzentos reais."
+animais,Lobo-guará,15,"Maior canídeo da América do Sul, tem pelagem alaranjada, pernas longas e vive no cerrado."
+aves,Águia,5,"Ave de rapina, visão aguçada."
+aves,Águia,10,"Ave de rapina poderosa, voa alto e tem visão impressionante."
+aves,Águia,15,"Ave de rapina com garras e visão aguçada, símbolo de poder em brasões e bandeiras."
+aves,Gavião,5,"Rapina menor, caça em voo."
+aves,Gavião,10,Ave de rapina que caça pequenos animais com garras afiadas.
+aves,Gavião,15,"Ave de rapina de porte médio, que mergulha rapidamente do céu para capturar pequenos animais."
+aves,Urubu,5,Ave preta que come carniça.
+aves,Urubu,10,Ave preta que plana e se alimenta de animais mortos.
+aves,Urubu,15,Ave preta de cabeça pelada que plana em círculos e limpa a natureza comendo carniça.
+aves,Falcão,5,Ave mais rápida do mundo.
+aves,Falcão,10,"Ave de rapina veloz, usada em caça esportiva por séculos."
+aves,Falcão,15,"Ave de rapina que passa de trezentos quilômetros por hora mergulhando, o animal mais rápido."
+aves,Pombo,5,"Comum nas praças, arrulha muito."
+aves,Pombo,10,"Ave cinzenta comum nas praças, já foi usada como mensageira."
+aves,Pombo,15,"Ave urbana cinzenta que arrulha nas praças e, no passado, levava mensagens entre cidades distantes."
+aves,Galinha,5,Bota ovos e cacareja muito.
+aves,Galinha,10,"Ave do quintal que cacareja, cisca e bota ovos diariamente."
+aves,Galinha,15,"Ave doméstica que cacareja, cisca o terreiro em busca de grãos e fornece ovos frescos."
+aves,Pato,5,Faz quá-quá e nada bem.
+aves,Pato,10,"Bico achatado, pés palmados, nada em lagos e faz quá-quá."
+aves,Pato,15,"Ave de bico achatado e pés com membranas, nada em lagos e grasna fazendo quá-quá."
+aves,Ganso,5,"Grande, branco, ótimo vigia barulhento."
+aves,Ganso,10,"Ave grande e barulhenta, ótima vigia de quintais e fazendas."
+aves,Ganso,15,"Ave maior que o pato, de pescoço longo, grasna alto e defende território com bravura."
+aves,Peru,5,Ave típica da ceia natalina.
+aves,Peru,10,"Ave grande de papo vermelho, prato principal em ceias natalinas."
+aves,Peru,15,"Ave grande que abre a cauda em leque, faz glu-glu e é servida no Natal."
+aves,Cisne,5,Ave elegante de pescoço curvo.
+aves,Cisne,10,"Ave aquática branca e elegante, de pescoço longo em curva."
+aves,Cisne,15,"Ave aquática elegante de pescoço longo e curvado, que inspirou um famoso balé de Tchaikovsky."
+aves,Gaivota,5,"Ave branca das praias, barulhenta."
+aves,Gaivota,10,Ave marinha branca e cinza que sobrevoa praias e portos.
+aves,Gaivota,15,"Ave marinha branca e cinzenta, sempre perto de praias e barcos, disputando restos de peixe."
+aves,Pelicano,5,Bico com bolsa para peixes.
+aves,Pelicano,10,Ave aquática com uma grande bolsa no bico para pescar.
+aves,Pelicano,15,Ave aquática que mergulha para pescar e guarda peixes numa bolsa elástica sob o bico.
+aves,Andorinha,5,"Migra em bandos, anuncia verão."
+aves,Andorinha,10,Pequena ave de cauda bifurcada que migra em grandes bandos.
+aves,Andorinha,15,Ave de cauda bifurcada que migra em bandos; diz o ditado: sozinha não faz verão.
+aves,Sabiá,5,"Canta bonito, ave nacional brasileira."
+aves,Sabiá,10,"Ave símbolo do Brasil, famosa pelo canto melodioso ao amanhecer."
+aves,Sabiá,15,"Ave símbolo do Brasil, de peito alaranjado, cantada na Canção do Exílio de Gonçalves Dias."
+aves,Bem-te-vi,5,Grita o próprio nome alto.
+aves,Bem-te-vi,10,"Peito amarelo, faixa branca na cabeça, canta o próprio nome."
+aves,Bem-te-vi,15,"Ave comum nas cidades, de peito amarelo e máscara preta, cujo canto repete seu nome."
+aves,João-de-barro,5,Constrói ninho de argila redondo.
+aves,João-de-barro,10,Pássaro marrom que constrói ninho de argila parecido com forno.
+aves,João-de-barro,15,"Pássaro marrom, símbolo da Argentina, ergue com lama e palha um ninho que lembra forno."
+aves,Quero-quero,5,Vigia gramados e ataca intrusos.
+aves,Quero-quero,10,Ave dos gramados que grita e defende seu ninho bravamente.
+aves,Quero-quero,15,"Ave comum em campos e estádios, tem esporões nas asas, grita e defende o ninho."
+aves,Seriema,5,"Pernas longas, canto alto, cerrado."
+aves,Seriema,10,"Ave do cerrado de pernas longas, topete e canto escandaloso."
+aves,Seriema,15,"Ave do cerrado que prefere correr a voar, tem topete e canto ouvido de longe."
+aves,Ema,5,"Maior ave brasileira, não voa."
+aves,Ema,10,Ave dos campos brasileiros que corre rápido mas não voa.
+aves,Ema,15,"Maior ave das Américas, parente do avestruz, corre rápido e o macho choca os ovos."
+aves,Gralha-azul,5,Planta pinheiros enterrando seus pinhões.
+aves,Gralha-azul,10,Ave símbolo do Paraná que enterra pinhões e planta araucárias.
+aves,Gralha-azul,15,"Ave símbolo do Paraná, de cabeça preta, que esquece pinhões enterrados e assim planta araucárias."
+aves,Corvo,5,"Ave preta, inteligente e misteriosa."
+aves,Corvo,10,"Ave toda preta, inteligente, associada a mistério e mau agouro."
+aves,Corvo,15,"Ave toda preta, considerada uma das mais inteligentes, famosa no poema de Edgar Allan Poe."
+aves,Cegonha,5,Dizem que traz os bebês.
+aves,Cegonha,10,"Ave de pernas longas que, segundo a lenda, entrega bebês."
+aves,Cegonha,15,"Ave de pernas e bico longos que faz ninhos em telhados; na lenda, traz bebês."
+aves,Martim-pescador,5,Mergulha rápido para pegar peixes.
+aves,Martim-pescador,10,"Ave colorida de bico longo, mergulha em rios caçando peixes."
+aves,Martim-pescador,15,Ave de bico comprido que espera em galhos sobre rios e mergulha para capturar peixes.
+aves,Albatroz,5,Maior envergadura entre as aves.
+aves,Albatroz,10,Ave marinha de asas enormes que plana horas sobre oceanos.
+aves,Albatroz,15,"Ave marinha de maior envergadura do mundo, plana milhares de quilômetros quase sem bater asas."
+aves,Codorna,5,Bota ovinhos pequenos e pintados.
+aves,Codorna,10,"Ave de criação, seus ovos pintados viram petiscos em festas."
+aves,Codorna,15,"Pequena ave de penas marrons, criada em granjas por seus ovinhos pintados, servidos como petisco."
+aves,Curió,5,Pássaro preto de canto valorizado.
+aves,Curió,10,"Pequeno pássaro de canto famoso, macho preto com peito avermelhado."
+aves,Curió,15,"Pequeno pássaro brasileiro de canto muito apreciado, cujo macho é preto com o peito castanho-avermelhado."
+aves,Uirapuru,5,Canto raro e mágico amazônico.
+aves,Uirapuru,10,Pássaro amazônico de canto tão belo que a floresta silencia.
+aves,Uirapuru,15,"Pássaro da Amazônia, protagonista de lendas, cujo canto raro faz os animais pararem para ouvir."
+aves,Harpia,5,Águia mais poderosa das Américas.
+aves,Harpia,10,Grande ave de rapina amazônica que caça macacos e preguiças.
+aves,Harpia,15,"Chamada gavião-real, é a ave de rapina mais poderosa do Brasil, com garras e penacho."
+aves,Carcará,5,Ave de rapina do sertão.
+aves,Carcará,10,"Ave de rapina do sertão, com cara vermelha e topete."
+aves,Carcará,15,"Ave de rapina oportunista que anda pelo chão, de face avermelhada e um topete preto."
+aves,Tuiuiú,5,Ave símbolo do Pantanal mato-grossense.
+aves,Tuiuiú,10,"Ave símbolo do Pantanal, com pescoço preto e colar vermelho."
+aves,Tuiuiú,15,"Grande cegonha do Pantanal, de corpo branco, cabeça preta e uma faixa vermelha no pescoço."
+lugar,Praia,5,"Areia, mar, sol e conchas."
+lugar,Praia,10,"Areia e ondas, ótimo para tomar sol e construir castelos."
+lugar,Praia,15,"Faixa de areia à beira-mar onde pessoas tomam sol, mergulham nas ondas e constroem castelos."
+lugar,Escola,5,Lugar de aprender com professores.
+lugar,Escola,10,"Lugar onde crianças estudam, fazem provas e brincam no recreio."
+lugar,Escola,15,"Tem salas de aula, quadro e carteiras, onde alunos aprendem com professores e fazem amigos."
+lugar,Hospital,5,Médicos cuidam dos doentes aqui.
+lugar,Hospital,10,"Lugar com médicos, enfermeiros e ambulâncias, onde cuidamos da saúde."
+lugar,Hospital,15,"Funciona dia e noite com médicos e enfermeiros, recebendo ambulâncias e tratando doentes ou feridos."
+lugar,Biblioteca,5,"Estantes cheias de livros, silêncio."
+lugar,Biblioteca,10,Lugar silencioso com estantes de livros que podemos pegar emprestados.
+lugar,Biblioteca,15,"Espaço cheio de estantes, onde é possível ler, estudar e levar livros emprestados para casa."
+lugar,Museu,5,Guarda obras de arte antigas.
+lugar,Museu,10,"Lugar que exibe obras de arte, fósseis e objetos históricos."
+lugar,Museu,15,"Edifício que preserva e exibe obras de arte, fósseis e objetos históricos para visitantes admirarem."
+lugar,Cinema,5,"Tela grande, pipoca e escuro."
+lugar,Cinema,10,"Sala escura com tela gigante, onde assistimos filmes comendo pipoca."
+lugar,Cinema,15,"Sala escura com poltronas e tela enorme, onde compramos ingresso para assistir filmes comendo pipoca."
+lugar,Teatro,5,Atores se apresentam no palco.
+lugar,Teatro,10,"Tem palco e cortinas, onde atores apresentam peças ao vivo."
+lugar,Teatro,15,"Espaço com palco, plateia e cortinas vermelhas, onde atores encenam peças para o público aplaudir."
+lugar,Padaria,5,Cheiro de pão quentinho fresco.
+lugar,Padaria,10,"Onde compramos pão francês quentinho, bolos e café pela manhã."
+lugar,Padaria,15,"Estabelecimento com forno aceso, que vende pão francês, sonhos, bolos e café com leite cedinho."
+lugar,Farmácia,5,Lugar para comprar remédios receitados.
+lugar,Farmácia,10,"Onde compramos remédios, curativos, vitaminas e produtos de higiene pessoal."
+lugar,Farmácia,15,"Loja com uma cruz verde na fachada, onde compramos remédios receitados pelo médico e cosméticos."
+lugar,Supermercado,5,"Carrinho, prateleiras, caixa e compras."
+lugar,Supermercado,10,Lugar com carrinhos e corredores cheios de alimentos e produtos.
+lugar,Supermercado,15,"Loja com corredores, prateleiras e carrinhos, onde fazemos compras do mês e pagamos no caixa."
+lugar,Restaurante,5,Escolhemos pratos no cardápio aqui.
+lugar,Restaurante,10,Onde escolhemos pratos no cardápio e o garçom nos serve.
+lugar,Restaurante,15,"Estabelecimento com mesas, cardápio e cozinheiros, onde garçons servem refeições e depois pedimos a conta."
+lugar,Aeroporto,5,Aviões decolam e pousam aqui.
+lugar,Aeroporto,10,"Tem pistas, portões de embarque e aviões decolando sem parar."
+lugar,Aeroporto,15,"Tem pistas, torre de controle e portões de embarque, onde fazemos check-in antes de voar."
+lugar,Rodoviária,5,Ônibus partem para outras cidades.
+lugar,Rodoviária,10,Terminal de onde partem e chegam ônibus para outras cidades.
+lugar,Rodoviária,15,"Terminal com plataformas e guichês de passagens, de onde partem ônibus para viagens entre cidades."
+lugar,Estádio,5,Torcida grita gol na arquibancada.
+lugar,Estádio,10,"Grande arena com arquibancadas, onde torcedores assistem jogos de futebol."
+lugar,Estádio,15,"Enorme construção com gramado e arquibancadas, onde milhares de torcedores vibram com partidas de futebol."
+lugar,Parque,5,"Árvores, bancos, gramado e passeios."
+lugar,Parque,10,"Área verde da cidade com árvores, bancos, lagos e brinquedos."
+lugar,Parque,15,"Área verde com árvores, bancos, trilhas e brinquedos, perfeita para piqueniques e caminhadas em família."
+lugar,Zoológico,5,Muitos animais em recintos cercados.
+lugar,Zoológico,10,"Lugar onde visitamos leões, girafas e macacos de vários continentes."
+lugar,Zoológico,15,"Espaço que abriga animais de várias partes do mundo em recintos, para visitação e preservação."
+lugar,Igreja,5,Torre com sino e bancos.
+lugar,Igreja,10,"Sino, bancos e altar: lugar onde fiéis assistem à missa."
+lugar,Igreja,15,"Templo cristão com torre, sino e vitrais, onde acontecem missas, batizados e casamentos aos domingos."
+lugar,Castelo,5,Morada de reis e rainhas.
+lugar,Castelo,10,"Fortaleza com torres, muralhas e fosso, onde moravam reis medievais."
+lugar,Castelo,15,"Construção medieval com torres altas, muralhas e ponte levadiça, onde viviam reis, rainhas e princesas."
+lugar,Floresta,5,"Muitas árvores, sombra e animais."
+lugar,Floresta,10,"Área enorme coberta de árvores, onde vivem muitos animais selvagens."
+lugar,Floresta,15,"Área coberta por árvores altas e vegetação densa, lar de inúmeros animais, como a Amazônia."
+lugar,Deserto,5,"Areia, calor e pouca água."
+lugar,Deserto,10,"Lugar muito seco, com dunas de areia, cactos e camelos."
+lugar,Deserto,15,"Região seca, quase sem chuva, com dunas de areia, dias escaldantes e noites bem frias."
+lugar,Montanha,5,"Muito alta, com pico nevado."
+lugar,Montanha,10,"Elevação enorme de rocha, às vezes com neve no topo."
+lugar,Montanha,15,"Elevação de rocha que alpinistas escalam até o pico, como o Everest, a mais alta."
+lugar,Ilha,5,Pedaço de terra cercado d'água.
+lugar,Ilha,10,Porção de terra cercada de água por todos os lados.
+lugar,Ilha,15,"Porção de terra cercada por água, que só pode ser alcançada de barco ou avião."
+lugar,Vulcão,5,Montanha que expele lava quente.
+lugar,Vulcão,10,Montanha com cratera que entra em erupção e expele lava.
+lugar,Vulcão,15,"Abertura na crosta terrestre, geralmente em forma de montanha, que lança lava, cinzas e gases."
+lugar,Caverna,5,Buraco escuro dentro da rocha.
+lugar,Caverna,10,"Abertura escura na rocha, com morcegos, estalactites e muito eco."
+lugar,Caverna,15,"Cavidade natural escura dentro de montanhas, onde vivem morcegos e se formam estalactites e estalagmites."
+lugar,Cachoeira,5,Água despenca das pedras altas.
+lugar,Cachoeira,10,"Queda d'água de um rio entre pedras, ótima para banho."
+lugar,Cachoeira,15,"Onde a água de um rio despenca de pedras altas, formando um poço para banho."
+lugar,Fazenda,5,"Vacas, plantações e vida rural."
+lugar,Fazenda,10,"Propriedade rural com plantações, curral, vacas, porcos, galinhas e cavalos."
+lugar,Fazenda,15,Propriedade no campo onde se plantam alimentos e se criam animais como vacas e galinhas.
+lugar,Feira,5,Barracas de frutas na rua.
+lugar,Feira,10,"Barracas montadas na rua vendendo frutas, verduras, pastel e caldo-de-cana."
+lugar,Feira,15,"Mercado de rua montado uma vez por semana, com vendedores gritando ofertas de frutas frescas."
+lugar,Shopping,5,"Lojas, praça de alimentação, cinema."
+lugar,Shopping,10,"Prédio enorme com lojas, praça de alimentação e escadas rolantes."
+lugar,Shopping,15,"Centro comercial com dezenas de lojas, cinema, praça de alimentação e escadas rolantes entre andares."
+lugar,Banco,5,"Guarda dinheiro, tem caixas eletrônicos."
+lugar,Banco,10,"Instituição onde guardamos dinheiro, pagamos contas e pedimos empréstimos também."
+lugar,Banco,15,"Instituição financeira com agências e caixas eletrônicos, onde abrimos contas, guardamos dinheiro e pedimos empréstimos."
+lugar,Correios,5,"Envia cartas, encomendas e telegramas."
+lugar,Correios,10,Onde enviamos cartas e encomendas para qualquer parte do país.
+lugar,Correios,15,"Tem agências de fachada amarela e azul, onde despachamos cartas e pacotes e compramos selos."
+lugar,Hotel,5,Hospedagem com quartos para viajantes.
+lugar,Hotel,10,Onde turistas se hospedam em quartos com recepção e serviço.
+lugar,Hotel,15,"Estabelecimento com recepção, quartos e café da manhã, onde viajantes pagam diárias para se hospedar."
+lugar,Acampamento,5,"Barracas, fogueira e noite estrelada."
+lugar,Acampamento,10,Lugar na natureza onde montamos barracas e acendemos uma fogueira.
+lugar,Acampamento,15,"Área ao ar livre onde montamos barracas, acendemos fogueira, contamos histórias e dormimos sob estrelas."
+lugar,Circo,5,"Palhaços, malabaristas e lona colorida."
+lugar,Circo,10,"Tenda de lona com palhaços, mágicos, trapezistas e muitos malabaristas."
+lugar,Circo,15,"Espetáculo itinerante sob grande lona colorida, com palhaços, trapezistas, mágicos e malabaristas encantando o público."
+lugar,Aquário,5,Peixes nadando atrás do vidro.
+lugar,Aquário,10,Tem tanques de vidro cheios de peixes e animais marinhos.
+lugar,Aquário,15,"Espaço com tanques de vidro, onde visitantes observam peixes, tubarões, tartarugas e outros animais marinhos."
+lugar,Piscina,5,"Água azul com cloro, mergulho."
+lugar,Piscina,10,"Grande tanque com água clorada, perfeito para nadar no verão."
+lugar,Piscina,15,"Tanque com água azulada, em clubes ou casas, onde nadamos e pulamos do trampolim alto."
+lugar,Academia,5,"Pesos, esteiras e muito suor."
+lugar,Academia,10,"Tem esteiras, pesos e aparelhos para malhar e ganhar músculos."
+lugar,Academia,15,"Espaço com esteiras, halteres e aparelhos de musculação, onde as pessoas treinam orientadas por instrutores."
+lugar,Prefeitura,5,Sede do governo da cidade.
+lugar,Prefeitura,10,Prédio onde trabalha quem governa a cidade e seus secretários.
+lugar,Prefeitura,15,"Sede do governo municipal, onde se administram ruas, escolas, postos de saúde e serviços locais."
+lugar,Universidade,5,Lugar de cursos de graduação.
+lugar,Universidade,10,Instituição de ensino superior onde estudantes fazem faculdade e pesquisas.
+lugar,Universidade,15,"Instituição de ensino superior com vários cursos, onde se formam médicos, engenheiros, advogados e pesquisadores."
+lugar,Cozinha,5,"Fogão, geladeira, panelas e pia."
+lugar,Cozinha,10,"Cômodo com fogão, geladeira e pia, onde preparamos as refeições."
+lugar,Cozinha,15,"Cômodo com fogão, geladeira, pia e armários, onde preparamos o almoço e lavamos a louça."
+lugar,Banheiro,5,"Chuveiro, pia, vaso e espelho."
+lugar,Banheiro,10,"Cômodo com chuveiro, pia e vaso sanitário, onde nos lavamos."
+lugar,Banheiro,15,"Cômodo com chuveiro, vaso, pia e espelho, onde escovamos os dentes e cuidamos da higiene."
+lugar,Quarto,5,"Cama, travesseiro e guarda-roupa aqui."
+lugar,Quarto,10,"Cômodo com cama e guarda-roupa, onde dormimos todas as noites."
+lugar,Quarto,15,"Cômodo íntimo da casa, com cama, travesseiros e guarda-roupa, onde dormimos e guardamos nossas roupas."
+lugar,Jardim,5,"Flores, plantas e regador aqui."
+lugar,Jardim,10,"Área com flores, plantas e gramado, cuidada com regador diariamente."
+lugar,Jardim,15,"Área com canteiros de flores e gramado, cuidada com regador, adubo e tesoura de poda."
+lugar,Porto,5,Navios atracam para carregar cargas.
+lugar,Porto,10,Local costeiro onde navios atracam para carregar e descarregar mercadorias.
+lugar,Porto,15,"Fica no litoral, com cais, guindastes e contêineres, onde grandes navios carregam e descarregam mercadorias."
+lugar,Farol,5,Torre com luz guiando navios.
+lugar,Farol,10,Torre alta no litoral com luz giratória que orienta navegantes.
+lugar,Farol,15,"Torre alta à beira-mar, com luz potente que gira à noite para orientar os navios."
+lugar,Planetário,5,Cúpula que mostra o céu.
+lugar,Planetário,10,Cúpula onde projetam estrelas e constelações para estudarmos o universo.
+lugar,Planetário,15,"Prédio com cúpula onde se projetam estrelas, constelações e galáxias, como numa incrível viagem espacial."
+lugar,Lavanderia,5,Máquinas limpam e secam roupas.
+lugar,Lavanderia,10,Onde deixamos roupas sujas e as recebemos limpas e passadas.
+lugar,Lavanderia,15,"Estabelecimento com máquinas, onde deixamos roupas sujas e buscamos depois tudo limpo, seco e passado."
+lugar,Laboratório,5,Cientistas fazem experimentos com jalecos.
+lugar,Laboratório,10,"Tem tubos de ensaio e microscópios, onde cientistas fazem experimentos."
+lugar,Laboratório,15,"Ambiente com microscópios, tubos de ensaio e jalecos, onde cientistas realizam experimentos e analisam amostras."
+lugar,Delegacia,5,Onde registramos boletim de ocorrência.
+lugar,Delegacia,10,Lugar onde policiais trabalham e pessoas registram boletins de ocorrência.
+lugar,Delegacia,15,Repartição da polícia civil onde se registram boletins de ocorrência e investigadores apuram os crimes.
+lugar,Lago,5,Água parada cercada de terra.
+lugar,Lago,10,"Porção de água doce cercada de terra, ótima para pescar."
+lugar,Lago,15,"Porção de água doce cercada de terra, onde podemos pescar, remar ou andar de pedalinho."
+lugar,Sorveteria,5,Casquinhas geladas de vários sabores.
+lugar,Sorveteria,10,"Loja que vende casquinhas, picolés e taças de vários sabores."
+lugar,Sorveteria,15,"Loja procurada no calor, que vende casquinhas, picolés e milkshakes de chocolate, morango e flocos."
